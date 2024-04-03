@@ -36,7 +36,7 @@ import { ColorGenInput } from './interfaces/type';
      class: 'ant-color-picker-inline',
      '[class.ant-color-picker-disabled]': `nzDisabled`
    },
-   encapsulation: ViewEncapsulation.None,
+   encapsulation: ViewEncapsulation.Emulated,
    providers: [
      {
        provide: NG_VALUE_ACCESSOR,
