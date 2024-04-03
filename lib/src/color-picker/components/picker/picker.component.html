@@ -1,0 +1,25 @@
+<div
+#slider
+class="ant-color-picker-select"
+(mousedown)="dragStartHandle($event)"
+(touchstart)="dragStartHandle($event)"
+>
+<base-color-palette>
+  <div
+    #transform
+    style="position: absolute; z-index: 1;"
+    [style.left]="offsetValue.x + 'px'"
+    [style.top]="offsetValue.y + 'px'"
+  >
+    <base-color-handler [color]="toRgbString()"></base-color-handler>
+  </div>
+  <div
+    class="ant-color-picker-saturation"
+    style="
+  background-image: linear-gradient(0deg, #000, transparent),
+    linear-gradient(90deg, #fff, hsla(0, 0%, 100%, 0));
+"
+    [style.background-color]="toHsb()"
+  ></div>
+</base-color-palette>
+</div>

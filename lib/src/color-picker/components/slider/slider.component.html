@@ -1,0 +1,19 @@
+<div
+      #slider
+      (mousedown)="dragStartHandle($event)"
+      (touchstart)="dragStartHandle($event)"
+      class="ant-color-picker-slider"
+      [ngClass]="'ant-color-picker-slider-' + type"
+    >
+      <base-color-palette>
+        <div
+          #transform
+          style="position: absolute; z-index: 1;"
+          [style.left]="offsetValue.x + 'px'"
+          [style.top]="offsetValue.y + 'px'"
+        >
+          <base-color-handler size="small" [color]="value"></base-color-handler>
+        </div>
+        <base-color-gradient [colors]="gradientColors" [direction]="direction" [type]="type"></base-color-gradient>
+      </base-color-palette>
+    </div>

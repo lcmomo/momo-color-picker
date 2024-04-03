@@ -1,0 +1,31 @@
+<div [class.ant-color-picker-trigger]="!nzFlipFlop" [class.ant-color-picker-sm]="nzSize === 'small'"
+  [class.ant-color-picker-lg]="nzSize === 'large'" nz-popover [nzPopoverContent]="colorPicker"
+  [nzPopoverTrigger]="!nzDisabled ? nzTrigger : null" [nzPopoverVisible]="nzOpen"
+  (nzPopoverVisibleChange)="nzOnOpenChange.emit($event)">
+  <nz-color-block *ngIf="!nzFlipFlop" [nzColor]="blockColor" [nzSize]="nzSize"></nz-color-block>
+  <ng-template *ngIf="nzFlipFlop" [ngTemplateOutlet]="nzFlipFlop"></ng-template>
+  <div *ngIf="nzShowText && !!showText && !nzFlipFlop" class="ant-color-picker-trigger-text">
+    {{ showText }}
+  </div>
+</div>
+<ng-template #colorPicker>
+  <ng-antd-color-picker [value]="nzValue" [defaultValue]="nzDefaultValue" [disabled]="nzDisabled"
+    [panelRenderHeader]="nzPanelRenderHeader" [panelRenderFooter]="nzPanelRenderFooter"
+    [disabledAlpha]="nzDisabledAlpha" (nzOnChange)="colorChange($event)"></ng-antd-color-picker>
+</ng-template>
+<ng-template #nzPanelRenderHeader>
+
+  <div *ngIf="nzTitle || nzAllowClear" class="ant-color-picker-title">
+    <div class="ant-color-picker-title-content">
+      <ng-container *ngIf="isNzTitleTemplateRef" [ngTemplateOutlet]="$any(nzTitle)"></ng-container>
+      <span *ngIf="isNzTitleNonEmptyString" [innerHTML]="nzTitle"></span>
+      <div *ngIf="nzAllowClear" class="ant-color-picker-clear" (click)="clearColorHandle()"></div>
+
+    </div>
+  </div>
+</ng-template>
+<ng-template #nzPanelRenderFooter>
+  <nz-color-format [colorValue]="blockColor" [clearColor]="clearColor" [format]="nzFormat"
+    [nzDisabledAlpha]="nzDisabledAlpha" [nzDisabledFormat]="nzDisabledFormat" (formatChange)="formatChange($event)"
+    (nzOnFormatChange)="nzOnFormatChange.emit($event)"></nz-color-format>
+</ng-template>

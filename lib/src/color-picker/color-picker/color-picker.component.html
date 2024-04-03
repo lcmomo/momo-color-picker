@@ -1,0 +1,23 @@
+<div class="ant-color-picker-panel" [class.ant-color-picker-panel-disabled]="disabled">
+  <ng-container *ngIf="panelRenderHeader">
+    <ng-template [ngTemplateOutlet]="panelRenderHeader"></ng-template>
+  </ng-container>
+  <base-color-picker [color]="colorValue" (nzOnChange)="handleChange($event)" [disabled]="disabled"
+    (nzOnChangeComplete)="nzOnChangeComplete.emit($event)"></base-color-picker>
+  <div class="ant-color-picker-slider-container">
+    <div class="ant-color-picker-slider-group" [class.ant-color-picker-slider-group-disabled-alpha]="disabledAlpha">
+      <base-color-slider [color]="colorValue" [value]="'hsl(' + colorValue?.toHsb()?.h + ',100%, 50%)'"
+        [gradientColors]="hueColor" (nzOnChange)="handleChange($event, 'hue')" [disabled]="disabled"
+        (nzOnChangeComplete)="nzOnChangeComplete.emit($event)"></base-color-slider>
+      <ng-container *ngIf="!disabledAlpha">
+        <base-color-slider type="alpha" [color]="colorValue" [value]="toRgbString" [gradientColors]="gradientColors"
+          (nzOnChange)="handleChange($event, 'alpha')" [disabled]="disabled"
+          (nzOnChangeComplete)="nzOnChangeComplete.emit($event)"></base-color-slider>
+      </ng-container>
+    </div>
+    <ng-antd-color-block [color]="toRgbString"></ng-antd-color-block>
+  </div>
+  <ng-container *ngIf="panelRenderFooter">
+    <ng-template [ngTemplateOutlet]="panelRenderFooter"></ng-template>
+  </ng-container>
+</div>

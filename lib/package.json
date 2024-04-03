@@ -1,0 +1,22 @@
+{
+  "name": "@geominfo/color-picker",
+  "description": "Color picker widget for Angular version less than 17",
+  "version": "1.0.0",
+  "license": "MIT",
+  "author": "geominfo",
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "peerDependencies": {
+    "rxjs": "~7.5.0",
+    "zone.js": "~0.11.4",
+    "@angular/animations": "~13.3.0",
+    "@angular/common": "~13.3.0",
+    "@angular/compiler": "~13.3.0",
+    "@angular/core": "~13.3.0",
+    "@angular/forms": "~13.3.0",
+    "@angular/platform-browser": "~13.3.0",
+    "@angular/platform-browser-dynamic": "~13.3.0",
+    "ng-zorro-antd": "^13.2.2"
+  }
+}
