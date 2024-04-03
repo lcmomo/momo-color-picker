@@ -11,7 +11,7 @@
     "test": "ng test"
   },
   "dependencies": {
-    "momo-color-picker": "^1.0.0-alpha2",
+    "momo-color-picker": "^1.0.0-beta0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
