@@ -4945,6 +4945,13 @@ mkdirp@^1.0.3, mkdirp@^1.0.4:
   resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
 
+momo-color-picker@^1.0.0-alpha:
+  version "1.0.0-alpha"
+  resolved "https://registry.npmjs.org/momo-color-picker/-/momo-color-picker-1.0.0-alpha.tgz#b2b1dc37319a01aa16ceeacd39e0c24f02eb08b2"
+  integrity sha512-+pVrDkhj8AwpsqzxQOwS+/VuF+rCuCpXV8LHIzxiNozRiLo51mIqFC8v3DrpGwwUvwdio6FpVp7bEL2dEQSW0Q==
+  dependencies:
+    tslib "^2.3.0"
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"

@@ -1,4 +1,4 @@
-# GeominfoColorPicker
+# MomoColorPicker
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
 
@@ -8,10 +8,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ```bash
 #use npm
-npm install @geominfo/color-picker
+npm install momo-color-picker
 
 #use yarn
-yarn add @geominfo/color-picker
+yarn add momo-color-picker
 ```
 
 ## usage example
