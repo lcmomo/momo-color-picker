@@ -1,27 +1,44 @@
-# ColorPicker
+# MomoColorPicker
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
 
-## Development server
+**基于ng-zorro-antd@17 nz-color-picker 组件实现，适用于小于17版本的angular项目**
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## installation
 
-## Code scaffolding
+```bash
+#use npm
+npm install momo-color-picker
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#use yarn
+yarn add momo-color-picker
+```
 
-## Build
+## usage example
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```js
+import { MomoColorPickerModule } from 'momo-color-picker'
 
-## Running unit tests
+@NgModule({
+  declarations: [
+  // ...
+  ],
+  imports: [
+    MomoColorPickerModule
+  ],
+  providers: [],
+  bootstrap: [
+    // ...
+  ]
+})
+export class AppModule { }
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
 
-## Running end-to-end tests
+```html
+<momo-color-picker nzShowText [nzDisabledFormat]="true" [(ngModel)]="color" (ngModelChange)="changeColor($event)"></momo-color-picker>
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+属性及事件方法与nz-color-picker组件一致
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

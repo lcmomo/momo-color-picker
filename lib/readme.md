@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.11.
 
-**基于ng-zorro-antd@17 nz-color-picker 组件实现，适配版本小于17的angular项目**
+**基于ng-zorro-antd@17 nz-color-picker 组件实现，适用于小于17版本的angular项目**
 
 ## installation
 
