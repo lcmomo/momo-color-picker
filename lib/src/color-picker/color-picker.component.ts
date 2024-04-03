@@ -31,7 +31,6 @@ import { ColorGenInput } from './interfaces/type';
    exportAs: 'MomoColorPicker',
    changeDetection: ChangeDetectionStrategy.OnPush,
    templateUrl: './color-picker.component.html',
-   styleUrls: ['./color-picker.component.less'],
    host: {
      class: 'ant-color-picker-inline',
      '[class.ant-color-picker-disabled]': `nzDisabled`
