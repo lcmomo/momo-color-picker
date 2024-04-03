@@ -34,4 +34,4 @@ const COMPONENTS = [
   imports: [ CommonModule,FormsModule, ReactiveFormsModule,  ...ZORRO_MODULES],
   exports:[NzColorPickerComponent, ...ZORRO_MODULES]
 })
-export class GeometryColorPickerModule{}
+export class MomoColorPickerModule{}

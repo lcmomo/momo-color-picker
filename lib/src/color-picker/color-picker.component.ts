@@ -27,8 +27,8 @@ import { Color } from './interfaces/color';
 import { ColorGenInput } from './interfaces/type';
  
  @Component({
-   selector: 'geometry-color-picker',
-   exportAs: 'GeometryColorPicker',
+   selector: 'momo-color-picker',
+   exportAs: 'MomoColorPicker',
    changeDetection: ChangeDetectionStrategy.OnPush,
    templateUrl: './color-picker.component.html',
    styleUrls: ['./color-picker.component.less'],

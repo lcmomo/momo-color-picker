@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
-    "build:lib": "ng build lib",
+    "build:lib": "ng build momo-color-picker",
     "build:demo": "ng build demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -14,7 +14,7 @@
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
   },
-  "private": true,
+  "private": false,
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.3.11",
     "@angular/animations": "~13.3.0",

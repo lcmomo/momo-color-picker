@@ -17,14 +17,14 @@ yarn add @geominfo/color-picker
 ## usage example
 
 ```js
-import { GeometryColorPickerModule } from '@geominfo/color-picker'
+import { MomoColorPickerModule } from 'momo-color-picker'
 
 @NgModule({
   declarations: [
   // ...
   ],
   imports: [
-    GeometryColorPickerModule
+    MomoColorPickerModule
   ],
   providers: [],
   bootstrap: [
@@ -36,7 +36,7 @@ export class AppModule { }
 ```
 
 ```html
-<geometry-color-picker nzShowText [nzDisabledFormat]="true" [(ngModel)]="color" (ngModelChange)="changeColor($event)"></geometry-color-picker>
+<momo-color-picker nzShowText [nzDisabledFormat]="true" [(ngModel)]="color" (ngModelChange)="changeColor($event)"></momo-color-picker>
 ```
 
 属性及事件方法与nz-color-picker组件一致

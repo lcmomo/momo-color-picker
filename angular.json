@@ -94,7 +94,7 @@
         }
       }
     },
-    "lib": {
+    "momo-color-picker": {
       "projectType": "library",
       "root": "lib",
       "sourceRoot": "lib/src",
@@ -118,5 +118,5 @@
       }
     }
   },
-  "defaultProject": "lib"
+  "defaultProject": "momo-color-picker"
 }
