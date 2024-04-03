@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MomoColorPickerModule } from 'momo-color-picker';
-// import { MomoColorPickerModule,NzColorPickerComponent, NzColorFormatComponent,NzColorBlockComponent } from '../../../lib/src/index';
 import { AppComponent } from './app.component';
 
 
@@ -12,9 +11,7 @@ import { AppComponent } from './app.component';
     AppComponent
   ],
   imports: [
-    // ...ZORRO_MODULES,
     BrowserModule,
-    // NzPopoverModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

@@ -6,5 +6,10 @@
     "entryFile": "src/public-api.ts",
     "cssUrl": "inline",
     "styleIncludePaths": ["src/color-picker/index.less"]
-  }
+  },
+  "allowedNonPeerDependencies": ["@ctrl/tinycolor"],
+  "assets": [
+    "./styles/*.*",
+    "./LICENSE.*"
+  ]
 }
