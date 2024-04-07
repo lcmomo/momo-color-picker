@@ -1,7 +1,7 @@
 <div [class.ant-color-picker-trigger]="!nzFlipFlop" [class.ant-color-picker-sm]="nzSize === 'small'"
   [class.ant-color-picker-lg]="nzSize === 'large'" nz-popover [nzPopoverContent]="colorPicker"
   [nzPopoverTrigger]="!nzDisabled ? nzTrigger : null" [nzPopoverVisible]="nzOpen"
-  (nzPopoverVisibleChange)="nzOnOpenChange.emit($event)">
+  (nzPopoverVisibleChange)="nzOnOpenChange.emit($event)" nz-tooltip [nzTooltipTitle]="tooltipConfig.title">
   <nz-color-block *ngIf="!nzFlipFlop" [nzColor]="blockColor" [nzSize]="nzSize"></nz-color-block>
   <ng-template *ngIf="nzFlipFlop" [ngTemplateOutlet]="nzFlipFlop"></ng-template>
   <div *ngIf="nzShowText && !!showText && !nzFlipFlop" class="ant-color-picker-trigger-text">

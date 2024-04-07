@@ -8,6 +8,9 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'color-picker';
   color ="#666";
+  tooltipConfig = {
+    title: 'fff',
+  }
   changeColor(color: any) {
     console.log("color: ", this.color)
   }
