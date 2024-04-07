@@ -1,1 +1,11 @@
-<momo-color-picker nzShowText [nzDisabledFormat]="false" [(ngModel)]="color" (ngModelChange)="changeColor($event)"></momo-color-picker>
+<p>基础使用</p>
+<momo-color-picker [nzDisabledFormat]="false" [(ngModel)]="color" (ngModelChange)="changeColor($event)"></momo-color-picker>
+<hr />
+<p>自定义触发元素</p>
+<momo-color-picker  [nzFlipFlop]="flipFlop" [nzDisabledFormat]="false" [(ngModel)]="color" (ngModelChange)="changeColor($event)"></momo-color-picker>
+<ng-template #flipFlop>
+  <button nz-button nzType="primary" [style.background-color]="color">Color</button>
+</ng-template>
+<hr />
+<p >tooltip, 仅支持hover触发方式</p>
+<momo-color-picker [nzDisabledFormat]="false" [tooltipConfig]="tooltipConfig" [(ngModel)]="color" (ngModelChange)="changeColor($event)"></momo-color-picker>

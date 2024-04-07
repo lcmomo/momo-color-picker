@@ -25,6 +25,7 @@
  import { NzColor, NzColorPickerFormatType, NzColorPickerTriggerType } from './types';
 import { Color } from './interfaces/color';
 import { ColorGenInput } from './interfaces/type';
+import { defaultTooltipConfig, TooltipConfig } from './interfaces/tooltip';
  
  @Component({
    selector: 'momo-color-picker',
@@ -50,7 +51,7 @@ import { ColorGenInput } from './interfaces/type';
    static ngAcceptInputType_nzAllowClear: BooleanInput;
    static ngAcceptInputType_nzDisabled: BooleanInput;
    static ngAcceptInputType_nzDisabledAlpha: BooleanInput;
-   static ngAcceptInputType_zDisabledFormat: BooleanInput;
+   static ngAcceptInputType_nzDisabledFormat: BooleanInput;
    @Input() nzFormat: NzColorPickerFormatType | null = null;
    @Input() nzValue: string | NzColor = '';
    @Input() nzSize: NzSizeLDSType = 'default';
@@ -58,6 +59,8 @@ import { ColorGenInput } from './interfaces/type';
    @Input() nzTrigger: NzColorPickerTriggerType = 'click';
    @Input() nzTitle: TemplateRef<void> | string = '';
    @Input() nzFlipFlop: TemplateRef<void> | null = null;
+   @Input() tooltipConfig: TooltipConfig = defaultTooltipConfig;
+
    @Input() @InputBoolean() nzShowText: boolean = false;
    @Input() @InputBoolean() nzOpen: boolean = false;
    @Input() @InputBoolean() nzAllowClear: boolean = false;
