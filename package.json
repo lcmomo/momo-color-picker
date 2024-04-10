@@ -4,9 +4,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve demo",
-    "build:lib": "npm run build:lib-less && ng build momo-color-picker",
+    "build": "npm run build:lib-less && ng build momo-color-picker",
     "build:demo": "ng build demo",
-    "build:lib-less": "lessc lib/styles/index.less lib/styles/index.css",
+    "build:lib-less": "lessc projects/momo-color-picker/styles/index.less projects/momo-color-picker/styles/index.css",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
