@@ -15,23 +15,23 @@
         }
       },
       "root": "",
-      "sourceRoot": "demo/src",
-      "prefix": "demo",
+      "sourceRoot": "projects/demo/src",
+      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/demo",
-            "index": "demo/src/index.html",
-            "main": "demo/src/main.ts",
-            "polyfills": "demo/src/polyfills.ts",
-            "tsConfig": "demo/tsconfig.json",
+            "index": "projects/demo/src/index.html",
+            "main": "projects/demo/src/main.ts",
+            "polyfills": "projects/demo/src/polyfills.ts",
+            "tsConfig": "projects/demo/tsconfig.json",
             "assets": [
-              "demo/src/favicon.ico",
-              "demo/src/assets"
+              "projects/demo/src/favicon.ico",
+              "projects/demo/src/assets"
             ],
             "styles": [
-              "demo/src/styles.less"
+              "projects/demo/src/styles.less"
             ],
             "scripts": []
           },
@@ -39,8 +39,8 @@
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "demo/src/environments/environment.ts",
-                  "with": "demo/src/environments/environment.prod.ts"
+                  "replace": "projects/demo/src/environments/environment.ts",
+                  "with": "projects/demo/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -96,21 +96,21 @@
     },
     "momo-color-picker": {
       "projectType": "library",
-      "root": "lib",
-      "sourceRoot": "lib/src",
+      "root": "projects/momo-color-picker",
+      "sourceRoot": "projects/momo-color-picker/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "lib/ng-package.json"
+            "project": "projects/momo-color-picker/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "lib/tsconfig.prod.json"
+              "tsConfig": "projects/momo-color-picker/tsconfig.prod.json"
             },
             "development": {
-              "tsConfig": "lib/tsconfig.json"
+              "tsConfig": "projects/momo-color-picker/tsconfig.json"
             }
           },
           "defaultConfiguration": "production"
