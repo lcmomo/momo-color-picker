@@ -15,5 +15,5 @@ export class AppComponent {
     console.log("color: ", this.color)
   }
 
-  inputValue = '2022';
+  inputValue = '';
 }

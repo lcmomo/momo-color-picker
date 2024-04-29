@@ -2,7 +2,7 @@
   <div class="{{ prefixCls }}-{{ panelMode }}-panel">
     <ng-container [ngSwitch]="panelMode">
       <ng-container *ngSwitchCase="'decade'">
-        <!-- <decade-header
+        <decade-header
           [(value)]="activeDate"
           [locale]="locale"
           [showSuperPreBtn]="enablePrevNext('prev', 'decade')"
@@ -11,15 +11,15 @@
           [showPreBtn]="false"
           (panelModeChange)="panelModeChange.emit($event)"
           (valueChange)="headerChange.emit($event)"
-        ></decade-header> -->
+        ></decade-header>
         <div class="{{ prefixCls }}-body">
-          <!-- <decade-table
+          <decade-table
             [activeDate]="activeDate"
             [value]="value"
             [locale]="locale"
             (valueChange)="onChooseDecade($event)"
             [disabledDate]="disabledDate"
-          ></decade-table> -->
+          ></decade-table>
         </div>
       </ng-container>
       <ng-container *ngSwitchCase="'year'">
@@ -44,6 +44,30 @@
             (valueChange)="onChooseYear($event)"
             (cellHover)="cellHover.emit($event)"
           ></year-table>
+        </div>
+      </ng-container>
+      <ng-container *ngSwitchCase="'quarter'">
+        <quarter-header
+          [(value)]="activeDate"
+          [locale]="locale"
+          [showSuperPreBtn]="enablePrevNext('prev', 'year')"
+          [showSuperNextBtn]="enablePrevNext('next', 'year')"
+          [showNextBtn]="false"
+          [showPreBtn]="false"
+          (panelModeChange)="panelModeChange.emit($event)"
+          (valueChange)="headerChange.emit($event)"
+        ></quarter-header>
+        <div class="{{ prefixCls }}-body">
+          <quarter-table
+            [activeDate]="activeDate"
+            [value]="value"
+            [locale]="locale"
+            [disabledDate]="disabledDate"
+            [selectedValue]="selectedValue"
+            [hoverValue]="hoverValue"
+            (valueChange)="onChooseYear($event)"
+            (cellHover)="cellHover.emit($event)"
+          ></quarter-table>
         </div>
       </ng-container>
     </ng-container>

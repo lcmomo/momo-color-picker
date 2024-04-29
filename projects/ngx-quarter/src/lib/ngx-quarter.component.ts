@@ -524,7 +524,8 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
       year: 'yyyy',
       month: 'yyyy-MM',
       week: this.i18n.getDateLocale() ? 'RRRR-II' : 'yyyy-ww', // Format for week
-      date: this.nzShowTime ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd'
+      date: this.nzShowTime ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd',
+      quarter: 'yyyy'
     };
 
     if (!this.nzMode) {

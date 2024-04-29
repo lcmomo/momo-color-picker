@@ -1,7 +1,4 @@
-/**
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/LICENSE
- */
+
 
 /**
  * A collection module of standard output for all lib components
@@ -19,6 +16,8 @@ import { DecadeHeaderComponent } from './decade-header.component';
 import { DecadeTableComponent } from './decade-table.component';
 import { YearHeaderComponent } from './year-header.component';
 import { YearTableComponent } from './year-table.component';
+import { QuarterHeaderComponent } from './quarter-header.component';
+import { QuarterTableComponent } from './quarter-table.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NzI18nModule, NzTimePickerModule, NzOutletModule],
@@ -26,13 +25,17 @@ import { YearTableComponent } from './year-table.component';
     DecadeHeaderComponent,
     DecadeTableComponent,
     YearHeaderComponent,
-    YearTableComponent
+    YearTableComponent,
+    QuarterHeaderComponent,
+    QuarterTableComponent
   ],
   declarations: [
     DecadeHeaderComponent,
     DecadeTableComponent,
     YearHeaderComponent,
-    YearTableComponent
+    YearTableComponent,
+    QuarterHeaderComponent,
+    QuarterTableComponent
   ]
 })
 export class LibPackerModule {}
