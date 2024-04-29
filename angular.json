@@ -116,6 +116,37 @@
           "defaultConfiguration": "production"
         }
       }
+    },
+    "ngx-quarter": {
+      "projectType": "library",
+      "root": "projects/ngx-quarter",
+      "sourceRoot": "projects/ngx-quarter/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-quarter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-quarter/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-quarter/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-quarter/src/test.ts",
+            "tsConfig": "projects/ngx-quarter/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-quarter/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "defaultProject": "momo-color-picker"

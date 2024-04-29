@@ -14,4 +14,6 @@ export class AppComponent {
   changeColor(color: any) {
     console.log("color: ", this.color)
   }
+
+  inputValue = '2022';
 }

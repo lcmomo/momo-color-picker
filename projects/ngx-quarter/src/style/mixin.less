@@ -1,0 +1,205 @@
+.reset-component {
+  box-sizing: border-box;
+  margin: 0;
+  color: #000000d9;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: "tnum", "tnum";
+}
+
+.hover(@color: @input-hover-border-color) {
+  border-color: @color;
+  border-right-width: @border-width-base;
+}
+
+.disabled() {
+  color: @input-disabled-color;
+  background-color: @input-disabled-bg;
+  border-color: @input-border-color;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 1;
+
+  &:hover {
+    .hover(@input-border-color);
+  }
+}
+
+.active(@borderColor: @primary-color; @hoverBorderColor: @primary-color-hover; @outlineColor: @primary-color-outline) {
+  & when (@theme =dark) {
+    border-color: @borderColor;
+  }
+
+  & when (not (@theme =dark) and not (@theme =variable)) {
+    border-color: @hoverBorderColor;
+  }
+
+  & when not (@theme =variable) {
+    box-shadow: @input-outline-offset @outline-blur-size @outline-width fade(@borderColor, @outline-fade);
+  }
+
+  & when (@theme =variable) {
+    border-color: @hoverBorderColor;
+    box-shadow: @input-outline-offset @outline-blur-size @outline-width @outlineColor;
+  }
+
+  border-right-width: @border-width-base;
+  outline: 0;
+}
+
+
+
+.placeholder(@color: @input-placeholder-color) {
+
+  // Firefox
+  /* stylelint-disable-next-line selector-no-vendor-prefix */
+  &::-moz-placeholder {
+    opacity: 1; // Override Firefox's unusual default opacity; see https://github.com/twbs/bootstrap/pull/11526
+  }
+
+  &::placeholder {
+    color: @color;
+    user-select: none; // https://github.com/ant-design/ant-design/pull/32639
+  }
+
+  &:placeholder-shown {
+    text-overflow: ellipsis;
+  }
+}
+
+.disabled() {
+  color: @input-disabled-color;
+  background-color: @input-disabled-bg;
+  border-color: @input-border-color;
+  box-shadow: none;
+  cursor: not-allowed;
+  opacity: 1;
+
+  &:hover {
+    .hover(@input-border-color);
+  }
+}
+
+.input-lg() {
+  padding: @input-padding-vertical-lg @input-padding-horizontal-lg;
+  font-size: @font-size-lg;
+}
+
+.input-sm() {
+  padding: @input-padding-vertical-sm @input-padding-horizontal-sm;
+}
+
+
+.input() {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  padding: @input-padding-vertical-base @input-padding-horizontal-base;
+  color: @input-color;
+  font-size: @font-size-base;
+  line-height: @line-height-base;
+  background-color: @input-bg;
+  background-image: none;
+  border: @border-width-base @border-style-base @input-border-color;
+  border-radius: @control-border-radius;
+  transition: all 0.3s;
+  .placeholder(); // Reset placeholder
+
+  &:hover {
+    .hover();
+  }
+
+  &:focus,
+  &-focused {
+    .active();
+  }
+
+  &-disabled {
+    .disabled();
+  }
+
+  &[disabled] {
+    .disabled();
+  }
+
+  &-borderless {
+
+    &,
+    &:hover,
+    &:focus,
+    &-focused,
+    &-disabled,
+    &[disabled] {
+      background-color: transparent;
+      border: none;
+      box-shadow: none;
+    }
+  }
+
+  // Reset height for `textarea`s
+  textarea& {
+    max-width: 100%; // prevent textearea resize from coming out of its container
+    height: auto;
+    min-height: @input-height-base;
+    line-height: @line-height-base;
+    vertical-align: bottom;
+    transition: all 0.3s, height 0s;
+  }
+
+  // Size
+  &-lg {
+    .input-lg();
+  }
+
+  &-sm {
+    .input-sm();
+  }
+}
+
+
+.roundedArrow(@width, @outer-radius, @bg-color: var(--antd-arrow-background-color)) {
+  @corner-height: unit(((@outer-radius) * (1 - 1 / sqrt(2))));
+
+  @width-without-unit: unit(@width);
+  @outer-radius-without-unit: unit(@outer-radius);
+  @inner-radius-without-unit: unit(@arrow-border-radius);
+
+  @a-x: @width-without-unit - @corner-height;
+  @a-y: 2 * @width-without-unit + @corner-height;
+  @b-x: @a-x + @outer-radius-without-unit * (1 / sqrt(2));
+  @b-y: 2 * @width-without-unit;
+  @c-x: 2 * @width-without-unit - @inner-radius-without-unit;
+  @c-y: 2 * @width-without-unit;
+  @d-x: 2 * @width-without-unit;
+  @d-y: 2 * @width-without-unit - @inner-radius-without-unit;
+  @e-x: 2 * @width-without-unit;
+  @e-y: @f-y + @outer-radius-without-unit * (1 / sqrt(2));
+  @f-x: 2 * @width-without-unit + @corner-height;
+  @f-y: @width-without-unit - @corner-height;
+  @g-x: @f-x - 1;
+  @g-y: @f-y;
+  @h-x: @a-x;
+  @h-y: @a-y - 1;
+
+  border-radius: 0 0 @arrow-border-radius;
+  pointer-events: none;
+
+  &::before {
+    position: absolute;
+    top: -@width;
+    left: -@width;
+    width: @width * 3;
+    height: @width * 3;
+    background: @bg-color;
+    // Hack firefox: https://github.com/ant-design/ant-design/pull/33710#issuecomment-1015287825
+    background-repeat: no-repeat;
+    background-position: ceil(-@width + 1px) ceil(-@width + 1px);
+    content: '';
+    clip-path: path(
+      'M @{a-x} @{a-y} A @{outer-radius-without-unit} @{outer-radius-without-unit} 0 0 1 @{b-x} @{b-y} L @{c-x} @{c-y} A @{inner-radius-without-unit} @{inner-radius-without-unit} 0 0 0 @{d-x} @{d-y} L @{e-x} @{e-y} A @{outer-radius-without-unit} @{outer-radius-without-unit} 0 0 1 @{f-x} @{f-y} L @{g-x} @{g-y} L @{h-x} @{h-y} Z'
+    );
+  }
+}

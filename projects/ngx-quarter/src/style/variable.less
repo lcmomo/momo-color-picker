@@ -1,0 +1,149 @@
+@ngx-prefix: ngx;
+@ant-prefix: ant;
+@theme: default;
+@picker-prefix-cls: ~'@{ngx-prefix}-picker';
+@tooltip-arrow-width: 8px * sqrt(2);
+@popover-arrow-width: @tooltip-arrow-width;
+@input-height-base: 32px;
+@font-size-base: 14px;
+@control-padding-horizontal: 8px;
+@picker-bg: #fff;
+@picler-bg-dark: #141414;
+@input-padding-horizontal-base: @control-padding-horizontal - 1px;
+
+// vertical paddings
+@padding-lg: 24px; // containers
+@padding-md: 16px; // small containers and buttons
+@padding-sm: 12px; // Form controls and items
+@padding-xs: 8px; // small items
+@padding-xss: 4px; // more small
+@border-width-base: 1px;
+@border-style-base: solid;
+@border-color-base: hsv(0, 0, 85%);
+@border-color-base-dark: #434343;
+@border-color-split: rgba(0, 0, 0, 0.06); // split border inside a component
+@border-color-inverse: @white;
+@border-width-base: 1px; // width of the border for a component
+@border-style-base: solid; // style of a components border
+
+// Outline
+@outline-blur-size: 0;
+@outline-width: 2px;
+@outline-color: @primary-color; // No use anymore
+@outline-fade: 20%;
+
+@select-border-color: @border-color-base;
+@border-radius-base: 2px;
+@control-border-radius: @border-radius-base;
+@animation-duration-slow: 0.3s;
+@animation-duration-slow: 0.3s;
+@line-height-base: 1.5715;
+
+@background-color-base: hsv(0, 0, 96%);
+@input-disabled-bg: @background-color-base;
+
+@disabled-color: fade(@black, 25%);
+@disabled-color-dark: fade(@white, 30%);
+
+@input-placeholder-color: hsv(0, 0, 75%);
+@input-placeholder-color-dark: fade(@white, 30%);
+
+@primary-color: #1890ff;
+@primary-color-hover: color(~`colorPalette('@{primary-color}', 5) `);
+@primary-color-outline: fade(@primary-color, @outline-fade);
+@input-padding-vertical-base: max((round(((@input-height-base - @font-size-base * @line-height-base) / 2) * 10) / 10) - @border-width-base,
+    3px);
+@text-color: fade(@black, 85%);
+@text-color-dark: fade(@white, 85%);
+@text-color-secondary: fade(@black, 45%);
+@text-color-secondary-dark: fade(@white, 45%);
+@input-color: @text-color;
+
+@component-background: @white;
+@component-background-dark: #141414;
+
+@input-bg: @component-background;
+@input-border-color: @border-color-base;
+
+@input-disabled-color: @disabled-color;
+@input-height-lg: 40px;
+@font-size-base: 14px;
+@font-size-lg: @font-size-base + 2px;
+@input-height-sm: 24px;
+@input-padding-vertical-lg: (ceil(((@input-height-lg - @font-size-lg * @line-height-base) / 2) * 10) / 10) - @border-width-base;
+
+@input-padding-horizontal-lg: @control-padding-horizontal - 1;
+@input-padding-horizontal-sm: @padding-sm -1;
+@input-padding-vertical-sm: max((round(((@input-height-sm - @font-size-base * @line-height-base) / 2) * 10) / 10) - @border-width-base,
+    0);
+
+@input-hover-border-color: #1890ff;
+@input-outline-offset: 0 0;
+
+.picker-padding(@input-height, @font-size, @padding-horizontal) {
+  // font height probably 22.0001， So use floor better
+  @font-height: floor(@font-size * @line-height-base) + 2;
+  @padding-top: max(((@input-height - @font-height) / 2), 0);
+  @padding-bottom: max(@input-height - @font-height - @padding-top, 0);
+  padding: @padding-top @padding-horizontal @padding-bottom;
+}
+
+
+@arrow-size: @popover-arrow-width;
+@zindex-picker: 1050;
+
+@picker-panel-cell-width: 36px;
+
+@popover-background: #1f1f1f;
+@component-background: #fff;
+@calendar-bg: @component-background;
+@border-color-split: hsv(0, 0, 94%);
+@border-color-split-dark: #303030;
+@picker-border-color: @border-color-split;
+
+@heading-color: fade(@black, 85%);
+@heading-color-dark: fade(@white, 85%);
+@picker-text-height: 40px;
+
+@picker-panel-cell-height: 24px;
+@item-hover-bg: #f5f5f5;
+@picker-basic-cell-hover-color: @item-hover-bg;
+
+@picker-basic-cell-active-with-range-color: @primary-1;
+@text-color-inverse: @text-color;
+@picker-date-hover-range-border-color: lighten(@primary-color, 20%);
+@picker-date-hover-range-border-color-dark: darken(@primary-color, 20%);
+@picker-date-hover-range-color: @picker-basic-cell-hover-with-range-color;
+@picker-date-hover-range-color-dark: @picker-date-hover-range-border-color-dark;
+@picker-basic-cell-hover-with-range-color: lighten(@primary-color, 35%);
+@picker-basic-cell-hover-with-range-color-dark: darken(@primary-color, 35%);
+@picker-basic-cell-disabled-bg: hsv(0, 0, 96%);
+@picker-panel-without-time-cell-height: 66px;
+@link-color: @primary-color;
+@picker-border-color: @border-color-split;
+@picker-border-color-dark: @border-color-split-dark;
+@link-hover-color-dark: @primary-5;
+@link-active-color-dark: @primary-7;
+
+@link-color: @primary-color;
+@link-hover-color: color(~`colorPalette('@{link-color}', 5) `);
+@link-active-color: color(~`colorPalette('@{link-color}', 7) `);
+@link-decoration: none;
+@link-hover-decoration: none;
+@link-focus-decoration: none;
+@link-focus-outline: 0;
+
+@picker-time-panel-column-height: 224px;
+@picker-time-panel-column-width: 100%;
+@picker-time-panel-cell-height: 28px;
+@calendar-column-active-bg: hsv(0, 0, 96%);
+@calendar-item-active-bg: @primary-1;
+
+@arrow-border-radius: 2px;
+@shadow-2: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+  0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+@shadow-2-dark: 0 3px 6px -4px rgba(0, 0, 0, 0.48), 0 6px 16px 0 rgba(0, 0, 0, 0.32),
+  0 9px 28px 8px rgba(0, 0, 0, 0.2);
+@box-shadow-base: @shadow-2;
+@box-shadow-base-dark: @shadow-2;
