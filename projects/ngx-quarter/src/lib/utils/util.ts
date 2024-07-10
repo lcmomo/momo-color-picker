@@ -1,9 +1,9 @@
 
-import { CandyDate } from 'ng-zorro-antd/core/time';
+import { CandyDate } from './candy-date';
 
 import { DisabledDateFn, DisabledTimeConfig, DisabledTimeFn } from '../type/standard-types';
 
-export const PREFIX_CLASS = 'ngx-picker';
+export const PREFIX_CLASS = 'ant-picker';
 
 const defaultDisabledTime: DisabledTimeConfig = {
   nzDisabledHours(): number[] {
@@ -84,4 +84,11 @@ export function getStatusClassNames(
     [`${prefixCls}-status-validating`]: status === 'validating',
     [`${prefixCls}-has-feedback`]: hasFeedback
   };
+}
+
+
+export function getQuarterFromDate(date: Date): string {
+  const month = date.getMonth();
+  const quarter = Math.ceil((month + 1) / 3);
+  return `Q${quarter}`;
 }

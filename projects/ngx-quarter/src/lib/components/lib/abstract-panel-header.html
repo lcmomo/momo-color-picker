@@ -1,14 +1,14 @@
 <div class="{{ prefixCls }}">
   <button
     [style.visibility]="showSuperPreBtn ? 'visible' : 'hidden'"
-    class="ngx-picker-super-prev-btn"
+    class="ant-picker-super-prev-btn"
     role="button"
     type="button"
     tabindex="-1"
     title="{{ superPreviousTitle() }}"
     (click)="superPrevious()"
   >
-    <span class="ngx-picker-super-prev-icon"></span>
+    <span class="ant-picker-super-prev-icon"></span>
   </button>
   <button
     [style.visibility]="showPreBtn ? 'visible' : 'hidden'"
@@ -19,7 +19,7 @@
     tabindex="-1"
     (click)="previous()"
   >
-    <span class="ngx-picker-prev-icon"></span>
+    <span class="ant-picker-prev-icon"></span>
   </button>
 
   <div class="{{ prefixCls }}-view">
@@ -44,7 +44,7 @@
     title="{{ nextTitle() }}"
     (click)="next()"
   >
-    <span class="ngx-picker-next-icon"></span>
+    <span class="ant-picker-next-icon"></span>
   </button>
   <button
     [style.visibility]="showSuperNextBtn ? 'visible' : 'hidden'"
@@ -55,6 +55,6 @@
     title="{{ superNextTitle() }}"
     (click)="superNext()"
   >
-    <span class="ngx-picker-super-next-icon"></span>
+    <span class="ant-picker-super-next-icon"></span>
   </button>
 </div>

@@ -1,8 +1,8 @@
 
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { CandyDate } from 'ng-zorro-antd/core/time';
+import { CandyDate } from '../../utils/candy-date';
 import { valueFunctionProp } from 'ng-zorro-antd/core/util';
-import { DateHelperService } from 'ng-zorro-antd/i18n';
+import { DateHelperService } from '../../i18n/date-helper.service';
 import { AbstractTable } from './abstract-table';
 import { DateBodyRow, DateCell, YearCell } from './interface';
 
@@ -73,7 +73,7 @@ export class YearTableComponent extends AbstractTable {
   override getClassMap(cell: YearCell): { [key: string]: boolean } {
     return {
       ...super.getClassMap(cell),
-      [`ngx-picker-cell-in-view`]: !!cell.isSameDecade
+      [`ant-picker-cell-in-view`]: !!cell.isSameDecade
     };
   }
 

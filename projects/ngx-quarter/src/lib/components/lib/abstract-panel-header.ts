@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { CandyDate } from 'ng-zorro-antd/core/time';
+import { CandyDate } from '../../utils/candy-date';
 import { NzCalendarI18nInterface } from 'ng-zorro-antd/i18n';
 import { NzDateMode } from '../../type/standard-types';
 import { PanelSelector } from './interface';
@@ -7,7 +7,7 @@ import { PanelSelector } from './interface';
 @Directive()
 // eslint-disable-next-line @angular-eslint/directive-class-suffix
 export abstract class AbstractPanelHeader implements OnInit, OnChanges {
-  prefixCls: string = `ngx-picker-header`;
+  prefixCls: string = `ant-picker-header`;
   selectors: PanelSelector[] = [];
 
   @Input() value!: CandyDate;
@@ -23,23 +23,21 @@ export abstract class AbstractPanelHeader implements OnInit, OnChanges {
   abstract getSelectors(): PanelSelector[];
 
   superPreviousTitle(): string {
-    // return this.locale.previousYear;
-    return '上一年 (Control键加左方向键)';
+
+    return this.locale.previousYear;
+   
   }
 
   previousTitle(): string {
-    // return this.locale.previousMonth;
-    return '上个月 (翻页上键)'
+    return this.locale.previousMonth;
   }
 
   superNextTitle(): string {
-    // return this.locale.nextYear;
-    return '下一年 (Control键加右方向键)';
+    return this.locale.nextYear;
   }
 
   nextTitle(): string {
-    // return this.locale.nextMonth;
-    return '下个月 (翻页下键)'
+    return this.locale.nextMonth;
   }
 
   superPrevious(): void {

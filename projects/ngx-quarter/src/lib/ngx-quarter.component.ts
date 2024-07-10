@@ -11,6 +11,7 @@ import {
   VerticalConnectionPos
 } from '@angular/cdk/overlay';
 import { Platform } from '@angular/cdk/platform';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputBoolean, toBoolean, valueFunctionProp } from 'ng-zorro-antd/core/util';
 import {
   BooleanInput,
@@ -28,31 +29,36 @@ import { DEFAULT_DATE_PICKER_POSITIONS, DATE_PICKER_POSITION_MAP } from './overl
 import { QuarterPickerService } from './services/quarter-picker.service';
 import { CompatibleDate, DisabledTimeFn, NzDateMode, PresetRanges, RangePartType, SupportTimeOptions } from './type/standard-types';
 import { Subject, distinctUntilChanged, takeUntil, withLatestFrom, of as observableOf, map } from 'rxjs';
-import { DateHelperService, NzDatePickerI18nInterface, NzDatePickerLangI18nInterface, NzI18nService } from 'ng-zorro-antd/i18n';
-import { CandyDate, CompatibleValue, cloneDate, wrongSortOrder } from 'ng-zorro-antd/core/time';
+import { DateHelperService, NzDatePickerI18nInterface, NzDatePickerLangI18nInterface, NzI18nService, en_US, zh_CN } from './i18n';
+
+import { CandyDate, CompatibleValue, cloneDate, wrongSortOrder } from './utils/candy-date';
 import { NzFormNoStatusService, NzFormStatusService } from './services';
 import { PREFIX_CLASS, getStatusClassNames } from './utils/util';
 import { DateRangePopupComponent } from './components/date-range-popup/date-range-popup.component';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+
+const LANGUAGES: { [key: string]: any } = {
+en_US,
+zh_CN
+};
 const POPUP_STYLE_PATCH = { position: 'relative' };
 const NZ_CONFIG_MODULE_NAME = 'quarterPicker';
 export type NzDatePickerSizeType = 'large' | 'default' | 'small';
 export type NzPlacement = 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
 @Component({
-  selector: 'lib-ngx-quarter',
+  selector: 'ngx-quarter',
   templateUrl: './ngx-quarter.component.html',
   styles: [
   ],
   host: {
-    '[class.ngx-picker]': `true`,
-    '[class.ngx-picker-range]': `isRange`,
-    '[class.ngx-picker-large]': `nzSize === 'large'`,
-    '[class.ngx-picker-small]': `nzSize === 'small'`,
-    '[class.ngx-picker-disabled]': `nzDisabled`,
-    '[class.ngx-picker-rtl]': `dir === 'rtl'`,
-    '[class.ngx-picker-borderless]': `nzBorderless`,
-    '[class.ngx-picker-inline]': `nzInline`,
+    '[class.ant-picker]': `true`,
+    '[class.ant-picker-range]': `isRange`,
+    '[class.ant-picker-large]': `nzSize === 'large'`,
+    '[class.ant-picker-small]': `nzSize === 'small'`,
+    '[class.ant-picker-disabled]': `nzDisabled`,
+    '[class.ant-picker-rtl]': `dir === 'rtl'`,
+    '[class.ant-picker-borderless]': `nzBorderless`,
+    '[class.ant-picker-inline]': `nzInline`,
     '(click)': 'onClickInputBox($event)'
   },
   animations: [slideMotion],
@@ -79,7 +85,6 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
   static ngAcceptInputType_nzMode: NzDateMode | NzDateMode[] | string | string[] | null | undefined;
   static ngAcceptInputType_nzShowTime: BooleanInput | SupportTimeOptions | null | undefined;
 
-  isRange: boolean = false; // Indicate whether the value is a range value
   extraFooter?: TemplateRef<NzSafeAny> | string;
   dir: Direction = 'ltr';
 
@@ -114,7 +119,7 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
   @Input() nzDisabledTime?: DisabledTimeFn;
   @Input() nzRenderExtraFooter?: TemplateRef<NzSafeAny> | string | FunctionProp<TemplateRef<NzSafeAny> | string>;
   @Input() @InputBoolean() nzShowToday: boolean = true;
-  @Input() nzMode: NzDateMode = 'year';
+  @Input() nzMode: NzDateMode = 'quarter';
   @Input() @InputBoolean() nzShowNow: boolean = true;
   @Input() nzRanges?: PresetRanges;
   @Input() nzDefaultPickerValue: CompatibleDate | null = null;
@@ -123,6 +128,8 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
   @Input() @WithConfig() nzBackdrop = false;
   @Input() nzId: string | null = null;
   @Input() nzPlacement: NzPlacement = 'bottomLeft';
+  @Input() isRange: boolean = false;
+  @Input() language: string = 'zh_CN';
 
   // TODO(@wenqi73) The PanelMode need named for each pickers and export
   @Output() readonly nzOnPanelChange = new EventEmitter<NzDateMode | NzDateMode[] | string | string[]>();
@@ -331,6 +338,7 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
   }
 
   formatValue(value: CandyDate): string {
+
     return this.dateHelper.format(value && (value as CandyDate).nativeDate, this.nzFormat);
   }
 
@@ -496,6 +504,10 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
       this.setDefaultPlaceHolder();
     }
 
+    if(changes['language']) {
+      this.switchLanguage(changes['language'].currentValue);
+    }
+
     if (changes['nzRenderExtraFooter']) {
       this.extraFooter = valueFunctionProp(this.nzRenderExtraFooter!);
     }
@@ -523,9 +535,9 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
     const inputFormats: { [key in NzDateMode]?: string } = {
       year: 'yyyy',
       month: 'yyyy-MM',
+      quarter: 'yyyy-[Q]Q',
       week: this.i18n.getDateLocale() ? 'RRRR-II' : 'yyyy-ww', // Format for week
       date: this.nzShowTime ? 'yyyy-MM-dd HH:mm:ss' : 'yyyy-MM-dd',
-      quarter: 'yyyy'
     };
 
     if (!this.nzMode) {
@@ -593,6 +605,7 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
     if (!this.isCustomPlaceHolder && this.nzLocale) {
       const defaultPlaceholder: { [key in NzDateMode]?: string } = {
         year: this.getPropertyOfLocale('yearPlaceholder'),
+        quarter: this.getPropertyOfLocale('quarterPlaceholder'),
         month: this.getPropertyOfLocale('monthPlaceholder'),
         week: this.getPropertyOfLocale('weekPlaceholder'),
         date: this.getPropertyOfLocale('placeholder')
@@ -600,6 +613,8 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
 
       const defaultRangePlaceholder: { [key in NzDateMode]?: string[] } = {
         year: this.getPropertyOfLocale('rangeYearPlaceholder'),
+        quarter: this.getPropertyOfLocale('rangeQuarterPlaceholder'),
+  
         month: this.getPropertyOfLocale('rangeMonthPlaceholder'),
         week: this.getPropertyOfLocale('rangeWeekPlaceholder'),
         date: this.getPropertyOfLocale('rangePlaceholder')
@@ -662,6 +677,7 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
     }
   }
 
+
   // status
   private setStatusStyles(status: string, hasFeedback: boolean): void {
     // set inner status
@@ -684,5 +700,9 @@ export class NgxQuarterComponent implements OnInit, OnChanges, OnDestroy, AfterV
     this.overlayPositions = [position, ...DEFAULT_DATE_PICKER_POSITIONS];
     this.currentPositionX = position.originX;
     this.currentPositionY = position.originY;
+  }
+
+  private switchLanguage(lang: string) {
+    this.i18n.setLocale(LANGUAGES[lang]);
   }
 }

@@ -10,7 +10,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { CandyDate } from 'ng-zorro-antd/core/time';
+import { CandyDate } from '../../utils/candy-date';
 import { FunctionProp } from 'ng-zorro-antd/core/types';
 import { NzCalendarI18nInterface } from 'ng-zorro-antd/i18n';
 
@@ -90,6 +90,12 @@ export class InnerPopupComponent implements OnChanges {
       this.headerChange.emit(value);
       this.panelModeChange.emit(this.endPanelMode);
     }
+  }
+
+  onChooseQuarter(value: CandyDate): void {
+    this.activeDate = this.activeDate.setQuarter(value.getQuarter());
+    this.value = value;
+    this.selectDate.emit(value);
   }
 
   onChooseYear(value: CandyDate): void {

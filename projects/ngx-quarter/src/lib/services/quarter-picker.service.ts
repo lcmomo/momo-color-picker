@@ -2,7 +2,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ReplaySubject, Subject } from 'rxjs';
 
-import { CandyDate, cloneDate, CompatibleValue, NormalizedMode, normalizeRangeValue } from 'ng-zorro-antd/core/time';
+import { CandyDate, cloneDate, CompatibleValue, NormalizedMode, normalizeRangeValue } from '../utils/candy-date';
 
 import { CompatibleDate, NzDateMode, RangePartType } from '../type/standard-types';
 
@@ -47,6 +47,7 @@ export class QuarterPickerService implements OnDestroy {
     const parentPanels: { [key in NzDateMode]?: NormalizedMode } = {
       date: 'month',
       month: 'year',
+      quarter: 'year',
       year: 'decade'
     };
     if (this.isRange) {
@@ -64,7 +65,6 @@ export class QuarterPickerService implements OnDestroy {
   getActiveIndex(part: RangePartType = this.activeInput): number {
     return { left: 0, right: 1 }[part];
   }
-
   ngOnDestroy(): void {
     this.valueChange$.complete();
     this.emitValue$.complete();

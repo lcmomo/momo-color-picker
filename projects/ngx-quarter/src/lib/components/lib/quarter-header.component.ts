@@ -2,6 +2,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractPanelHeader } from './abstract-panel-header';
 import { PanelSelector } from './interface';
+import { DateHelperService } from '../../i18n';
+import { transCompatFormat } from './util';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
@@ -30,13 +32,17 @@ export class QuarterHeaderComponent extends AbstractPanelHeader {
     this.changeValue(this.value.addYears(+1));
   }
 
+  constructor(private dateHelper: DateHelperService) {
+    super();
+  }
+
   getSelectors(): PanelSelector[] {
     return [
       {
         className: `${this.prefixCls}-quarter-btn`,
-        title: '',
+        title: this.locale.yearSelect,
         onClick: () => this.changeMode('year'),
-        label: `${this.currentYear}年`
+        label: this.dateHelper.format(this.value.nativeDate, transCompatFormat(this.locale.yearFormat))
       }
     ];
   }

@@ -11,4 +11,31 @@
 <momo-color-picker [nzDisabledFormat]="false" [tooltipConfig]="tooltipConfig" [(ngModel)]="color" (ngModelChange)="changeColor($event)"></momo-color-picker>
 
 <h2>Quarter</h2>
-<lib-ngx-quarter [nzMode]="'quarter'" nzInline [(ngModel)]="inputValue" ></lib-ngx-quarter>
+
+<button nz-button nzType="primary" (click)="changeLanguage()">切换语言</button>
+<ngx-quarter 
+  [nzBorderless]="false"
+  [nzStatus]="'error'"
+  [nzMode]="datePickerConfig.mode"
+  [isRange]="datePickerConfig.isRange"
+  [nzInline]="datePickerConfig.isInline"
+  [nzShowTime]="datePickerConfig.showTime"
+  [nzFormat]="datePickerConfig.format"
+  [nzSize]="datePickerConfig.size"
+  [nzDisabled]="datePickerConfig.disabled"
+  [nzDisabledDate]="datePickerConfig.disabledDate"
+  [nzDisabledTime]="datePickerConfig.disabledDateTime"
+  [nzRanges]="datePickerConfig.ranges"
+  [language]="language"
+  [(ngModel)]="inputValue"
+  (ngModelChange)="onDateChange($event)"
+  (nzOnOk)="onDateChange($event)"
+  >
+</ngx-quarter>
+<ng-template #tplRender let-current>
+  <div class="ant-picker-cell-inner" [class.border]="current.getDate() === 1">
+    {{ current.getDate() }}
+  </div>
+</ng-template>
+<p>{{inputValue}}</p>
+<p> formatDate: {{ formattedDate }}</p>

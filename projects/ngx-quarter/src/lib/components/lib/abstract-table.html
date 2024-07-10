@@ -1,4 +1,4 @@
-<table class="ngx-picker-content" cellspacing="0" role="grid">
+<table class="ant-picker-content" cellspacing="0" role="grid">
   <thead *ngIf="headRow && headRow.length > 0">
     <tr role="row">
       <th *ngIf="showWeek" role="columnheader"></th>
@@ -21,7 +21,7 @@
         (mouseenter)="cell.onMouseEnter()"
       >
         <ng-container [ngSwitch]="prefixCls">
-          <ng-container *ngSwitchCase="'ngx-picker'">
+          <ng-container *ngSwitchCase="'ant-picker'">
             <ng-container [ngSwitch]="true">
               <ng-container *ngSwitchCase="isTemplateRef(cell.cellRender)">
                 <!--           *ngSwitchCase not has type assertion support, the cellRender type here is TemplateRef -->
@@ -43,10 +43,10 @@
               </ng-container>
             </ng-container>
           </ng-container>
-          <ng-container *ngSwitchCase="'ngx-picker-calendar'">
+          <ng-container *ngSwitchCase="'ant-picker-calendar'">
             <div
-              class="{{ prefixCls }}-date ngx-picker-cell-inner"
-              [class.ngx-picker-calendar-date-today]="cell.isToday"
+              class="{{ prefixCls }}-date ant-picker-cell-inner"
+              [class.ant-picker-calendar-date-today]="cell.isToday"
             >
               <ng-container *ngIf="cell.fullCellRender; else defaultCell">
                 <ng-container

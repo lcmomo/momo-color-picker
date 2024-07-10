@@ -35,7 +35,7 @@
   }
 
   // ======================= Header =======================
-  &-header {
+  &-header{
     display: flex;
     padding: 0 @padding-xs;
     color: @heading-color;
@@ -133,7 +133,7 @@
   }
 
   // ======================== Body ========================
-  &-content {
+  &-content{
     width: 100%;
     table-layout: fixed;
     border-collapse: collapse;
@@ -184,7 +184,6 @@
         background: @picker-basic-cell-hover-color;
       }
     }
-
     // >>> Today
     &-in-view&-today .@{cellClassName} {
       &::before {
@@ -467,7 +466,7 @@
     }
 
     .@{picker-cell-inner-cls} {
-      width: @picker-year-month-cell-width;
+      min-width: @picker-year-month-cell-width;
     }
 
     .@{picker-prefix-cls}-cell-range-hover-start::after {
@@ -501,13 +500,14 @@
     }
 
     // Clear cell style
-    .@{picker-prefix-cls}-cell {
-      &:hover .@{picker-cell-inner-cls},
-      &-selected .@{picker-cell-inner-cls},
-      .@{picker-cell-inner-cls} {
-        background: transparent !important;
-      }
-    }
+    // .@{picker-prefix-cls}-cell {
+    //   &:hover .@{picker-cell-inner-cls},
+    //   &-selected .@{picker-cell-inner-cls},
+    //   .@{picker-cell-inner-cls}
+    //    {
+    //     background: transparent !important;
+    //   }
+    // }
 
     &-row {
       td {
@@ -528,8 +528,7 @@
 
         &.@{picker-prefix-cls}-cell-today .@{picker-cell-inner-cls}::before {
           border-color: @text-color-inverse;
-        }
-
+        } 
         .@{picker-cell-inner-cls} {
           color: @text-color-inverse;
         }
@@ -587,8 +586,8 @@
       display: flex;
       flex: auto;
       height: @picker-time-panel-column-height;
+      
     }
-
     &-column {
       flex: 1 0 auto;
       width: @picker-time-panel-column-width;
@@ -648,6 +647,7 @@
               background: @calendar-item-active-bg;
             }
           }
+          
 
           &-disabled {
             .@{picker-prefix-cls}-time-panel-cell-inner {
@@ -655,6 +655,8 @@
               background: transparent;
               cursor: not-allowed;
             }
+
+
           }
         }
       }

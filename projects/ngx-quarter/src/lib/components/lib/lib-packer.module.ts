@@ -18,6 +18,10 @@ import { YearHeaderComponent } from './year-header.component';
 import { YearTableComponent } from './year-table.component';
 import { QuarterHeaderComponent } from './quarter-header.component';
 import { QuarterTableComponent } from './quarter-table.component';
+import { DateHeaderComponent } from './date-header.component';
+import { MonthTableComponent } from './month-table.component';
+import { DateTableComponent } from './date-table.component';
+import { MonthHeaderComponent } from './month-header.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, NzI18nModule, NzTimePickerModule, NzOutletModule],
@@ -27,7 +31,11 @@ import { QuarterTableComponent } from './quarter-table.component';
     YearHeaderComponent,
     YearTableComponent,
     QuarterHeaderComponent,
-    QuarterTableComponent
+    QuarterTableComponent,
+    DateHeaderComponent,
+    DateTableComponent,
+    MonthHeaderComponent,
+    MonthTableComponent
   ],
   declarations: [
     DecadeHeaderComponent,
@@ -35,7 +43,11 @@ import { QuarterTableComponent } from './quarter-table.component';
     YearHeaderComponent,
     YearTableComponent,
     QuarterHeaderComponent,
-    QuarterTableComponent
+    QuarterTableComponent,
+    DateHeaderComponent,
+    MonthTableComponent,
+    MonthHeaderComponent,
+    DateTableComponent
   ]
 })
 export class LibPackerModule {}

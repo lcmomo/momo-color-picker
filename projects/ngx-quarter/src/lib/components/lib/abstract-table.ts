@@ -1,9 +1,9 @@
 
 import { Directive, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange, SimpleChanges, TemplateRef } from '@angular/core';
-import { CandyDate } from 'ng-zorro-antd/core/time';
+import { CandyDate } from '../../utils/candy-date';
 import { FunctionProp, NzSafeAny } from 'ng-zorro-antd/core/types';
 import { isNonEmptyString, isTemplateRef } from 'ng-zorro-antd/core/util';
-import { NzCalendarI18nInterface } from 'ng-zorro-antd/i18n';
+import { NzCalendarI18nInterface } from '../../i18n';
 import { DateBodyRow, DateCell } from './interface';
 
 @Directive()
@@ -16,7 +16,7 @@ export abstract class AbstractTable implements OnInit, OnChanges {
   MAX_ROW = 6;
   MAX_COL = 7;
 
-  @Input() prefixCls: string = 'ngx-picker';
+  @Input() prefixCls: string = 'ant-picker';
   @Input() value!: CandyDate;
   @Input() locale!: NzCalendarI18nInterface;
   @Input() activeDate: CandyDate = new CandyDate();
@@ -51,22 +51,22 @@ export abstract class AbstractTable implements OnInit, OnChanges {
 
   getClassMap(cell: DateCell): { [key: string]: boolean } {
     return {
-      [`ngx-picker-cell`]: true,
-      [`ngx-picker-cell-in-view`]: true,
-      [`ngx-picker-cell-selected`]: cell.isSelected,
-      [`ngx-picker-cell-disabled`]: cell.isDisabled,
-      [`ngx-picker-cell-in-range`]: !!cell.isInSelectedRange,
-      [`ngx-picker-cell-range-start`]: !!cell.isSelectedStart,
-      [`ngx-picker-cell-range-end`]: !!cell.isSelectedEnd,
-      [`ngx-picker-cell-range-start-single`]: !!cell.isStartSingle,
-      [`ngx-picker-cell-range-end-single`]: !!cell.isEndSingle,
-      [`ngx-picker-cell-range-hover`]: !!cell.isInHoverRange,
-      [`ngx-picker-cell-range-hover-start`]: !!cell.isHoverStart,
-      [`ngx-picker-cell-range-hover-end`]: !!cell.isHoverEnd,
-      [`ngx-picker-cell-range-hover-edge-start`]: !!cell.isFirstCellInPanel,
-      [`ngx-picker-cell-range-hover-edge-end`]: !!cell.isLastCellInPanel,
-      [`ngx-picker-cell-range-start-near-hover`]: !!cell.isRangeStartNearHover,
-      [`ngx-picker-cell-range-end-near-hover`]: !!cell.isRangeEndNearHover
+      [`ant-picker-cell`]: true,
+      [`ant-picker-cell-in-view`]: true,
+      [`ant-picker-cell-selected`]: cell.isSelected,
+      [`ant-picker-cell-disabled`]: cell.isDisabled,
+      [`ant-picker-cell-in-range`]: !!cell.isInSelectedRange,
+      [`ant-picker-cell-range-start`]: !!cell.isSelectedStart,
+      [`ant-picker-cell-range-end`]: !!cell.isSelectedEnd,
+      [`ant-picker-cell-range-start-single`]: !!cell.isStartSingle,
+      [`ant-picker-cell-range-end-single`]: !!cell.isEndSingle,
+      [`ant-picker-cell-range-hover`]: !!cell.isInHoverRange,
+      [`ant-picker-cell-range-hover-start`]: !!cell.isHoverStart,
+      [`ant-picker-cell-range-hover-end`]: !!cell.isHoverEnd,
+      [`ant-picker-cell-range-hover-edge-start`]: !!cell.isFirstCellInPanel,
+      [`ant-picker-cell-range-hover-edge-end`]: !!cell.isLastCellInPanel,
+      [`ant-picker-cell-range-start-near-hover`]: !!cell.isRangeStartNearHover,
+      [`ant-picker-cell-range-end-near-hover`]: !!cell.isRangeEndNearHover
     };
   }
 

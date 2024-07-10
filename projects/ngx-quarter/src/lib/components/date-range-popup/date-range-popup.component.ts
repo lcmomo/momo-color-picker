@@ -26,7 +26,7 @@ import {
   NormalizedMode,
   SingleValue,
   wrongSortOrder
-} from 'ng-zorro-antd/core/time';
+} from '../../utils/candy-date';
 import { FunctionProp } from 'ng-zorro-antd/core/types';
 import { NzCalendarI18nInterface } from 'ng-zorro-antd/i18n';
 
@@ -144,8 +144,8 @@ export class DateRangePopupComponent implements OnInit, OnChanges, OnDestroy {
   onClickOk(): void {
     const inputIndex = { left: 0, right: 1 }[this.quarterPickerService.activeInput];
     const value: CandyDate = this.isRange
-      ? (this.quarterPickerService.value as CandyDate[])[inputIndex]
-      : (this.quarterPickerService.value as CandyDate);
+      ? (this.quarterPickerService.value  as unknown as  CandyDate[])[inputIndex]
+      : (this.quarterPickerService.value as unknown as CandyDate);
     this.changeValueFromSelect(value);
     this.resultOk.emit();
   }
@@ -159,7 +159,7 @@ export class DateRangePopupComponent implements OnInit, OnChanges, OnDestroy {
       return;
     }
     const otherInputIndex = { left: 1, right: 0 }[this.quarterPickerService.activeInput];
-    const base = (this.quarterPickerService.value as CandyDate[])[otherInputIndex]!;
+    const base = (this.quarterPickerService.value as unknown as CandyDate[])[otherInputIndex]!;
     if (base) {
       if (base.isBeforeDay(value)) {
         this.hoverValue = [base, value];
