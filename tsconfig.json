@@ -21,6 +21,10 @@
     "paths": {
       "@modules": [
         "./node_modules"
+      ],
+      "ngx-quarter": [
+        "dist/ngx-quarter/ngx-quarter",
+        "dist/ngx-quarter"
       ]
     },
     "lib": [
