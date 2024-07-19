@@ -1,0 +1,49 @@
+<!-- <ngx-date-picker-mobile [flipFlop]="flipFlop" [nzOpen]="nzOpen" [isInline]="dateConfig.isInline"></ngx-date-picker-mobile>
+<ng-template #flipFlop>
+  <div class="extra-box" tableIndex="0" (click)="handleClick($event)">
+    <ng-container *ngIf="dateConfig.sectionChoose=='日期'">
+      <div class="search-item-box" [class.checked]="dateConfig.value"
+        [style]="dateConfig.value ? {borderColor: dateConfig.customSeriesColor, color: dateConfig.customSeriesColor} : ''">
+        <span *ngIf="!dateConfig.value">{{dateConfig.label}}</span>
+        <span *ngIf="dateConfig.value">{{dateConfig.value | date:'yyyy'}}</span>
+        <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="dateConfig.sectionChoose=='区间'">
+      <div class="search-item-box" [class.checked]="dateConfig.startValue || dateConfig.endValue"
+        [style]="dateConfig.startValue || dateConfig.endValue ? {borderColor: dateConfig.customSeriesColor, color: dateConfig.customSeriesColor} : ''">
+        <span *ngIf="!dateConfig.startValue && !dateConfig.endValue">{{dateConfig.label}}</span>
+        <span *ngIf="dateConfig.startValue || dateConfig.endValue">
+          {{dateConfig.startValue ? (dateConfig.startValue | date:'yyyy') : '开始时间'}}-{{ dateConfig.endValue ?
+          (dateConfig.endValue | date:'yyyy') : '结束时间'}}
+        </span>
+        <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+      </div>
+    </ng-container>
+  </div>
+</ng-template> -->
+<h3>指令方式引用</h3>
+<div class="box">
+<div appDatePicker class="extra-box" [parentContainer]="parentContainer" [mode]="mode" [startValue]="dateConfig.startValue" [endValue]="dateConfig.endValue" [isRange]="dateConfig.isRange" [showTime]="dateConfig.showTime" tableIndex="0" (click)="handleClick($event)" (onConfirm)="onConfirm($event)" >
+  <ng-container *ngIf="dateConfig.sectionChoose=='日期'">
+    <div class="search-item-box" [class.checked]="dateConfig.value"
+      [style]="dateConfig.value ? {borderColor: dateConfig.customSeriesColor, color: dateConfig.customSeriesColor} : ''">
+      <span *ngIf="!dateConfig.value">{{dateConfig.label}}</span>
+      <span *ngIf="dateConfig.value">{{dateConfig.value | date:'yyyy-MM-dd HH:mm:ss'}}</span>
+      <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="dateConfig.sectionChoose=='区间'">
+    <div class="search-item-box" [class.checked]="dateConfig.startValue || dateConfig.endValue"
+      [style]="dateConfig.startValue || dateConfig.endValue ? {borderColor: dateConfig.customSeriesColor, color: dateConfig.customSeriesColor} : ''">
+      <span *ngIf="!dateConfig.startValue && !dateConfig.endValue">{{dateConfig.label}}</span>
+      <span *ngIf="dateConfig.startValue || dateConfig.endValue">
+        {{dateConfig.startValue ? (dateConfig.startValue | date:'yyyy-MM-dd HH:mm:ss') : '开始时间'}}-{{ dateConfig.endValue ?
+        (dateConfig.endValue | date:'yyyy-MM-dd HH:mm:ss') : '结束时间'}}
+      </span>
+      <span nz-icon nzType="caret-down" nzTheme="outline"></span>
+    </div>
+  </ng-container>
+</div>
+
+</div>

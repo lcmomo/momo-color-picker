@@ -77,7 +77,7 @@ export class AppComponent {
       }
   }
   formattedDate:string = '';
-  inputValue = [new Date(), new Date()];
+  inputValue = new Date();
  
   changeColor(color: any) {
     console.log("color: ", this.color)

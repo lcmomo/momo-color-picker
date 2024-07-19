@@ -1,0 +1,66 @@
+<div class="{{prefixCls}}-content">
+ 
+  <div *ngIf="showWeek" class="weekDays" >
+    <span class="weekDay" [ngClass]="weekDay.classMap!"  *ngFor="let weekDay of headRow">{{ weekDay.content }}</span>
+  </div>
+  <div class="scroll-block" [class.half-height]="showTime && showTimePicker" #scrollContent (scroll)="hiddenTimePicker()">
+    <div  *ngIf="showBlockTitle else bodyRow" >
+      <div *ngFor="let block of bodyRows;let i = index" class="block" #blockElement>
+        <label><span>{{block.content}}</span></label>
+        <div class="date">
+          <div *ngFor="let row of block.children;let i=index" class="month">
+            <div [class]="mobileAgent ? 'content' : 'content custom-scroll'">
+              <div
+                *ngFor="let cell of row.dateCells"
+                class="{{prefixCls}}-cell"
+                [ngClass]="cell.classMap!"
+                (click)="cell.isDisabled ? null : cell.onClick()"
+              >
+                <span
+                >{{ cell.content }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-template #bodyRow>
+      <div class="date" [class.half-height]="showTime && showTimePicker">
+        <div *ngFor="let row of bodyRows;let i=index" class="month">
+         
+          <div [class]="mobileAgent ? 'content' : 'content custom-scroll'">
+            <div
+              *ngFor="let cell of row.dateCells"
+              class="{{prefixCls}}-cell"
+              [ngClass]="cell.classMap!"
+              (click)="cell.onClick()"
+            >
+              <span
+              >{{ cell.content }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+  <div class="time" *ngIf="showTime && showTimePicker">
+    <div class="header">{{timePickerTitle}}</div>
+    <PickerView [data]="times" [cascade]="false" [(ngModel)]="time" (ngModelChange)="onTimeChange($event)"></PickerView>
+  </div>
+  
+
+  <div class="footer">
+    <div class="time">
+      <div *ngIf="!isRange" class="single-time">
+        已选时间: {{ formatDate(value.nativeDate)}}
+      </div>
+      <div *ngIf="isRange">
+        开始时间: {{ formatDate(startValue) || '未选择'}}
+      </div>
+      <div *ngIf="isRange">
+        结束时间: {{ formatDate(endValue) || '未选择'}}
+      </div>
+    </div>
+    <div Button class="button" [disabled]="disConfirmBtn" (click)="onTriggerConfirm()" >确定</div>
+  </div>
+</div>

@@ -1,0 +1,40 @@
+<div class="{{prefixCls}}-panel">
+  <ng-container [ngSwitch]="props.mode">
+    <ng-container *ngSwitchCase="'date'">
+      <date-header [mode]="props.mode" [(value)]="state.activeDate" [showWeek]="props.showWeek" [locale]="locale" [showClean]="props.showClean"
+        [showClose]="props.showClose" [title]="title" (valueChange)="headerChange.emit($event)" (close)="onClose()" (clean)="onClean()">
+      </date-header>
+      <date-body [mode]="props.mode" [activeDate]="state.activeDate" [startValue]="state.startValue" [endValue]="state.endValue"
+        [inputValue]="state.inputValue" [showWeek]="props.showWeek" [locale]="locale" [showClean]="props.showClean"
+        [showTime]="props.showTime"
+        [showClose]="props.showClose" [title]="title"
+        [selectedValue]="state.inputValue"
+        [showTimePicker]="state.showTimePicker"
+        [timePickerTitle]="state.timePickerTitle"
+        [disConfirmBtn]="state.disConfirmBtn"
+        (valueChange)="onSelectDate($event)"
+        (triggerConfirm)="onTriggerConfirm()"
+        (timeChange)="onTimeChange($event)"
+        >
+      </date-body>
+    </ng-container>
+    <ng-container *ngSwitchCase="'quarter'">
+      <quarter-header [mode]="props.mode" [(value)]="state.activeDate" [locale]="locale" [showClean]="props.showClean"
+        [showClose]="props.showClose" [title]="title" (valueChange)="headerChange.emit($event)" (close)="onClose()" (clean)="onClean()">
+      </quarter-header>
+      <quarter-body [mode]="props.mode" [activeDate]="state.activeDate" [startValue]="state.startValue" [endValue]="state.endValue"
+        [inputValue]="state.inputValue" [showWeek]="props.showWeek" [locale]="locale" [showClean]="props.showClean"
+        [showTime]="props.showTime"
+        [showClose]="props.showClose" [title]="title"
+        [selectedValue]="state.inputValue"
+        [showTimePicker]="state.showTimePicker"
+        [timePickerTitle]="state.timePickerTitle"
+        [disConfirmBtn]="state.disConfirmBtn"
+        (valueChange)="onSelectDate($event)"
+        (triggerConfirm)="onTriggerConfirm()"
+        (timeChange)="onTimeChange($event)"
+        >
+    </quarter-body>
+    </ng-container>
+  </ng-container>
+</div>

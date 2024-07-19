@@ -1,0 +1,51 @@
+@import '../../../../../node_modules/ng-zorro-antd-mobile/icon/style/index.less';
+@import './themes/default.less';
+@import './themes/icon.less';
+@import './variable.less';
+@import './panel.less';
+.@{picker-prefix-cls} {
+  .extra-box{
+  display: flex;
+  .search-item-box{
+    height: 27px;
+    background-color: #F2F4F9;
+    border-radius: 18px;
+    padding: 0 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .search-item-box.checked{
+    background: rgba(73, 128, 255, 0.1);
+    border: 1px solid #4980FF;
+    color: #4980FF;;
+  }
+  .extra-title{
+    font-weight: 400;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.85);
+    margin: 0 8px;
+  }
+  img{
+    width: 12px;
+    height: 12px;
+    margin-left: 4px;
+    vertical-align: -1px;
+  }
+  .item-input-content{
+    min-width: 56px;
+    width: auto;
+    position: relative;
+    margin-left: 12px;
+    .item-input{
+      width: 100%;
+      height: 20px;
+      border: none;
+      background-color: #F2F4F9;
+    }
+    .item-label-hidden{
+      visibility: hidden;
+    }
+  }
+  }
+}

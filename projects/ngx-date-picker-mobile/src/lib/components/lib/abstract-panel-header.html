@@ -1,0 +1,20 @@
+<div class="{{prefixCls}}-header">
+  <Icon [style.visibility]="showClean ? 'visible' : 'hidden'" type="cross"  class="close" (click)="onClose()"></Icon>
+  <span class="title">{{title}}</span>
+  <span [style.visibility]="showClean ? 'visible' : 'hidden'" class="clean" (click)="onClean()">清除</span>
+  <Icon [style.visibility]="showClose ? 'visible' : 'hidden'" type="cross"  class="close" (click)="onClose()"></Icon>
+
+</div>
+<div  *ngIf="showYearTitle"class="{{prefixCls}}-header-year">
+  <Icon type="left" class="change-year" (click)="superPrevious()"></Icon>
+
+    <ng-container *ngFor="let selector of selectors">
+    <span>
+        {{ selector.label }}
+      </span>
+    </ng-container>
+  <Icon type="right" class="change-year" (click)="superNext()"></Icon>
+  <ng-template #none>
+    <div></div>
+  </ng-template>
+</div>

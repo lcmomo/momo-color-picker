@@ -31,7 +31,8 @@
               "projects/demo/src/assets"
             ],
             "styles": [
-              "projects/demo/src/styles.less"
+              "projects/demo/src/styles.less",
+              "node_modules/ng-zorro-antd-mobile/src/ng-zorro-antd-mobile.min.css"
             ],
             "scripts": []
           },
@@ -144,6 +145,37 @@
             "main": "projects/ngx-quarter/src/test.ts",
             "tsConfig": "projects/ngx-quarter/tsconfig.spec.json",
             "karmaConfig": "projects/ngx-quarter/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-date-picker-mobile": {
+      "projectType": "library",
+      "root": "projects/ngx-date-picker-mobile",
+      "sourceRoot": "projects/ngx-date-picker-mobile/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-date-picker-mobile/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-date-picker-mobile/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-date-picker-mobile/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-date-picker-mobile/src/test.ts",
+            "tsConfig": "projects/ngx-date-picker-mobile/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-date-picker-mobile/karma.conf.js"
           }
         }
       }

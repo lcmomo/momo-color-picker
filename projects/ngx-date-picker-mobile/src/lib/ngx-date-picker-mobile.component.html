@@ -1,0 +1,104 @@
+
+<ng-container *ngIf="!isInline; else inlineMode">
+  <!-- Content of single picker -->
+  <div>
+    <ng-container *ngIf="flipFlop; else innerFlipFlop">
+      <ng-container [ngTemplateOutlet]="flipFlop"></ng-container>
+    </ng-container>
+    <ng-template #innerFlipFlop>
+     <inner-flip-flop [value]="value" [startValue]="startValue" [endValue]="endValue" [placeHolder]="placeHolder" [isRange]="isRange" (click)="onClickInputBox($event)"></inner-flip-flop>
+    </ng-template>
+  </div>
+</ng-container>
+<!-- Input for Range ONLY -->
+<!-- <ng-template #tplRangeInput let-partType="partType">
+  <input
+    #rangePickerInput
+    [attr.id]="nzId"
+    [disabled]="nzDisabled"
+    [readOnly]="nzInputReadOnly"
+    [size]="inputSize"
+    autocomplete="off"
+    (click)="onClickInputBox($event)"
+    (focusout)="onFocusout($event)"
+    (focus)="onFocus($event, partType)"
+    (keyup.enter)="onKeyupEnter($event)"
+    [(ngModel)]="inputValue[quarterPickerService.getActiveIndex(partType)]"
+    (ngModelChange)="onInputChange($event)"
+    placeholder="{{ getPlaceholder(partType) }}"
+  />
+</ng-template> -->
+
+<!-- Right operator icons -->
+<!-- <ng-template #tplRightRest>
+  <div class="{{ prefixCls }}-active-bar" [ngStyle]="activeBarStyle"></div>
+  <span *ngIf="showClear()" class="{{ prefixCls }}-clear" (click)="onClickClear($event)">
+    <i nz-icon nzType="close-circle" nzTheme="fill"></i>
+  </span>
+  <span class="{{ prefixCls }}-suffix">
+    <ng-container *nzStringTemplateOutlet="nzSuffixIcon; let suffixIcon">
+      <i nz-icon [nzType]="suffixIcon"></i>
+    </ng-container>
+    <nz-form-item-feedback-icon *ngIf="hasFeedback && !!status" [status]="status"></nz-form-item-feedback-icon>
+  </span>
+</ng-template> -->
+
+<ng-template #inlineMode>
+  <div>inlineMode</div>
+  <date-popup [mode]="mode" [isRange]="isRange" [value]="value" [startValue]="startValue"></date-popup>
+  <!-- <div
+  class="{{ prefixCls }}-dropdown {{ nzDropdownClassName }}"
+    [class.ant-picker-dropdown-rtl]="dir === 'rtl'"
+    [class.ant-picker-dropdown-placement-bottomLeft]="currentPositionY === 'bottom' && currentPositionX === 'start'"
+    [class.ant-picker-dropdown-placement-topLeft]="currentPositionY === 'top' && currentPositionX === 'start'"
+    [class.ant-picker-dropdown-placement-bottomRight]="currentPositionY === 'bottom' && currentPositionX === 'end'"
+    [class.ant-picker-dropdown-placement-topRight]="currentPositionY === 'top' && currentPositionX === 'end'"
+    [class.ant-picker-dropdown-range]="isRange"
+    [class.ant-picker-active-left]="quarterPickerService.activeInput === 'left'"
+    [class.ant-picker-active-right]="quarterPickerService.activeInput === 'right'"
+  [ngStyle]="nzPopupStyle"
+  >
+
+    <date-range-popup
+      [isRange]="isRange"
+      [inline]="nzInline"
+      [defaultPickerValue]="nzDefaultPickerValue"
+      [showWeek]="nzMode === 'week'"
+      [panelMode]="panelMode"
+      (panelModeChange)="onPanelModeChange($event)"
+      (calendarChange)="onCalendarChange($event)"
+      [locale]="nzLocale?.lang!"
+      [showToday]="nzMode === 'date' && nzShowToday && !isRange && !nzShowTime"
+      [showNow]="nzMode === 'date' && nzShowNow && !isRange && !!nzShowTime"
+      [showTime]="nzShowTime"
+      [dateRender]="nzDateRender"
+      [disabledDate]="nzDisabledDate"
+      [disabledTime]="nzDisabledTime"
+      [extraFooter]="extraFooter"
+      [ranges]="nzRanges"
+      [dir]="dir"
+      (resultOk)="onResultOk()"
+    ></date-range-popup>
+  </div> -->
+</ng-template>
+
+<!-- Overlay -->
+<ng-template
+  cdkConnectedOverlay
+  nzConnectedOverlay
+  [cdkConnectedOverlayHasBackdrop]="nzBackdrop"
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="realOpenState"
+  [cdkConnectedOverlayPositions]="overlayPositions"
+  [cdkConnectedOverlayTransformOriginOn]="'.ant-picker-wrapper'"
+  (positionChange)="onPositionChange($event)"
+  (detach)="close()"
+  (overlayKeydown)="onOverlayKeydown($event)"
+>
+  <div
+    class="ant-picker-wrapper"
+    style="position: relative;"
+  >
+    <ng-container *ngTemplateOutlet="inlineMode"></ng-container>
+  </div>
+</ng-template>

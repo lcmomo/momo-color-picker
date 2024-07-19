@@ -1,0 +1,269 @@
+
+.@{picker-prefix-cls}-panel {
+  width: 100%;
+  height: 75%;
+  background-color: white;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-left);
+  &-header{
+    text-align: center;
+    height: 40px;
+    padding: 8px 15px 8px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .title{
+      font-family: PingFang SC;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 24px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.85);
+    }
+
+    .close{
+      width: 24px;
+      height: 24px;
+      background: #fff;
+      color: #999;
+    }
+    .clean{
+      font-family: PingFang SC;
+      position: absolute;
+      right: 24px;
+      top: 9px;
+      color: rgba(73, 128, 255, 1);
+    }
+  }
+  &-header-year {
+    padding: 0 26px;
+    height: 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: PingFang SC;
+    font-size: 14px;
+    text-align: center;
+
+    .change-year {
+      color: #999;
+    }
+  }
+
+  &-content {
+    height: calc(100% - 40px);
+   
+    .weekDays{
+      height: 42px;
+      border-bottom: 1px solid rgba(221, 221, 221, 1);
+      padding: 10px 2px;
+      margin-bottom: 16px;
+      .weekDay{
+        display: inline-block;
+        width: calc(100% / 7);
+        text-align: center;
+        font-family: PingFang SC;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.85);
+        &.gray{
+          color: rgba(187, 187, 187, 1);
+        }
+      }
+    }
+    label{
+      font-family: PingFang SC;
+      margin: 10px 0 8px 15px;
+      text-align: left;
+      font-size: 14px;
+      display: inline-block;
+      height: 20px;
+      line-height: 20px;
+
+    }
+   
+
+    .scroll-block {
+      // height: 280px;
+      height: calc(100% - 40px);
+      overflow-y: auto;
+      padding: 0 9px;
+
+      .block {
+        .date{
+          position: relative;
+          height: calc(100% - 108px);
+         
+          // &.half-height{
+          //   height: calc(100% - 302px);
+          // }
+      
+          .month{
+           height: 52px;
+           line-height: 32px;
+            .content{
+              display: flex;
+              flex-wrap: wrap;
+      
+              .@{picker-prefix-cls}-panel-cell {
+                width: calc(100% / 7);
+                text-align: center;
+                height: 32px;
+                font-family: PingFang SC;
+                font-size: 14px;
+                color: rgba(0, 0, 0, .25);
+                font-weight: 500;
+
+                &-quarter {
+                  width: calc(100% / 4);
+                }
+
+              
+                &-in-view {
+                  color: rgba(0, 0, 0, .85);         
+                }
+
+                &-in-range {
+                  position: relative;
+                  color: @text-color-inverse;
+                  background: @primary-color;
+            
+                  &::before {
+                    background: @blue-base;
+                  }
+                } 
+
+                &-range {
+                  &-selected,
+                  &-start,
+                  &-end {
+                    color: @text-color-inverse;
+                    background: @primary-color;
+                  }
+
+                  &-start:not(&-start-single),
+                  &-end:not(&-end-single) {
+                    &::before {
+                      background: @blue-base;
+                    }
+                  }
+
+                  &-start {
+                    border-radius: @border-radius-base 0 0 @border-radius-base;
+                  }
+              
+                  &-end {
+                    border-radius: 0 @border-radius-base @border-radius-base 0;
+                    }    
+                }
+
+                &-today {
+                  background: @button-color;
+                  border-radius: 20px;
+                  color: #fff;
+                }
+
+                 // >>> In Range
+   
+   
+
+    
+                // &.p-left{
+                //   padding-left: 9px;
+                // }
+                // &.p-right{
+                //   padding-right: 9px;
+                // }
+                // &.disabled, &.gray{
+                //   color: rgba(187, 187, 187, 1);
+                // }
+      
+                // span{
+                //   display: inline-block;
+                //   height: 35px;
+                //   width: 100%;
+                //   line-height: 35px;
+                // }
+              }
+            }
+          }
+        }
+      }
+      
+    }
+    .half-height{
+      height: calc(100% - 305px);
+    } 
+  
+    .time{
+      width: 100%;
+  
+      .header{
+        height: 44px;
+        font-family: PingFang SC;
+        font-size: 17px;
+        font-weight: 500;
+        line-height: 44px;
+        text-align: center;
+      }
+
+      .am-picker-col{
+        height: 100px;
+        .am-picker-col-indicator{
+          background-color: rgba(239, 239, 244);
+          border-bottom: 1px solid #ddd!important;
+          border-top: 1px solid #ddd!important;
+          z-index: unset;
+          top: 0px;
+        }
+        .am-picker-col-mask{
+          background-size: 100% 0px!important;
+          background-image:
+            linear-gradient(to bottom, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)),
+            linear-gradient(to top, rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45));
+        }
+        .am-picker-col-content{
+          padding: 0;
+          .am-picker-col-item{
+            color: rgba(0, 0, 0, 0.85);
+          }
+        }
+      }
+    }
+  
+  }
+  .footer{
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    bottom: env(safe-area-inset-bottom);
+    background: #F5F5F5;
+    padding: 10px calc(10px + env(safe-area-inset-left));
+    text-align: left;
+    .time{
+      height: 100%;
+      .single-time{
+        padding: 12px 0;
+      }
+    }
+    .button{
+      width: 56px;
+      height: 30px;
+      font-size: 13px;
+      line-height: 30px;
+      background-color: #4980ff;
+      color: #fff
+    }
+  }
+}
+
+
+

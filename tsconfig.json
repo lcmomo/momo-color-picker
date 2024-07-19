@@ -22,6 +22,10 @@
       "@modules": [
         "./node_modules"
       ],
+      "ngx-date-picker-mobile": [
+        "dist/ngx-date-picker-mobile/ngx-date-picker-mobile",
+        "dist/ngx-date-picker-mobile"
+      ],
       "ngx-quarter": [
         "dist/ngx-quarter/ngx-quarter",
         "dist/ngx-quarter"
