@@ -39,13 +39,18 @@ export class QuarterBodyComponent extends AbstractPanelBody {
   makeRows() {
    let blockList: Array<DateBodyRow> = [];
     const currentYear = this.activeDate.getYear();
-    let activeDate = this.activeDate.clone();
-    for(let i = 1970; i < 2069; i++) {
+    const propMaxYear = this.maxDate?.getFullYear();
+    const propMinYear = this.minDate?.getFullYear();
+
+    const maxYear = !propMaxYear ? currentYear :  Math.max(currentYear, propMaxYear);
+    const minYear = !propMinYear ? 1900 : Math.min(currentYear, propMinYear);
+
+    for(let year = minYear; year <= maxYear; year++) {
       const block: DateBodyRow = {
         isActive: false,
-        content: `${i}年`,
-        children: this.makeDaysOfMonth(new CandyDate(new Date(i)).setYear(i)),
-        trackByIndex: i,
+        content: `${year}年`,
+        children: this.makeQuarterOfYear(this.activeDate.setYear(year)),
+        trackByIndex: year,
         dateCells: []
       }
       blockList.push(block)
@@ -54,7 +59,7 @@ export class QuarterBodyComponent extends AbstractPanelBody {
 
   }
 
-  makeDaysOfMonth(activeDate: CandyDate) {
+  makeQuarterOfYear(activeDate: CandyDate) {
     const dateCells: DateCell[] = [];
     const months: DateBodyRow[] = [{ dateCells, trackByIndex: 0 }];
     let quarterValue = 1;
@@ -78,7 +83,7 @@ export class QuarterBodyComponent extends AbstractPanelBody {
         }
       };
 
-      this.addCellProperty(cell, date);
+      this.addCellProperty(cell, date, activeDate);
       dateCells.push(cell);
     }
     return months;
@@ -103,16 +108,7 @@ export class QuarterBodyComponent extends AbstractPanelBody {
       const [startHover, endHover] = this.hoverValue;
       const [startSelected, endSelected] = this.selectedValue;
 
-      if (startSelected?.isSameQuarter(month)) {
-        cell.isSelectedStart = true;
-        cell.isSelected = true;
-      }
-
-      if (endSelected?.isSameQuarter(month)) {
-        cell.isSelectedEnd = true;
-        cell.isSelected = true;
-      }
-
+   
       if (startHover && endHover) {
         cell.isHoverStart = startHover.isSameQuarter(month);
         cell.isHoverEnd = endHover.isSameQuarter(month);
@@ -125,20 +121,30 @@ export class QuarterBodyComponent extends AbstractPanelBody {
       cell.isInSelectedRange = startSelected?.isBeforeQuarter(month) && month?.isBeforeQuarter(endSelected as CandyDate);
       cell.isRangeStartNearHover = startSelected && cell.isInHoverRange;
       cell.isRangeEndNearHover = endSelected && cell.isInHoverRange;
+
+      if (startSelected?.isSameQuarter(month) || (month.getQuarter() === 1 && cell.isInSelectedRange)) {
+        cell.isSelectedStart = true;
+        cell.isSelected = true;
+      }
+
+      if (endSelected?.isSameQuarter(month) || (month.getQuarter() === 4 && cell.isInSelectedRange)) {
+        cell.isSelectedEnd = true;
+        cell.isSelected = true;
+      }
+
     } else if (month.isSameQuarter(this.value)) {
       cell.isSelected = true;
     }
-    cell.classMap = this.getClassMap(cell);
+    cell.classMap = this.getClassMap(cell, activeDate);
   
   }
 
   override getClassMap(cell: DateCell, activeDate?: CandyDate): { [key: string]: boolean } {
     const date = new CandyDate(cell.value);
-    const isStartOrEndOfWeek = [FIRST_DAY_OF_WEEK, END_DAY_OF_WEEK].includes(cell.trackByIndex);
     return {
       ...super.getClassMap(cell),
       [`${this.prefixCls}-cell-today`]: !!cell.isToday,
-      [`${this.prefixCls}-cell-in-view`]: date.isSameMonth(activeDate as CandyDate) && !isStartOrEndOfWeek
+      [`${this.prefixCls}-cell-in-view`]: !!date.isSameYear(activeDate as CandyDate)
       
     };
   }

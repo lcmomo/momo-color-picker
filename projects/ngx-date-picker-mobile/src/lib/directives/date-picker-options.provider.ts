@@ -14,6 +14,8 @@ export class DatePickerOptions {
 
   mode: DateMode = 'date';
   showTime: boolean = false;
+  maxDate: Date = new Date();
+  minDate: Date = new Date(1900, 0, 1);
 
   onConfirm: EventEmitter<any> = new EventEmitter();
 

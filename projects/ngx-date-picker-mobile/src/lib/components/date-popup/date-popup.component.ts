@@ -1,12 +1,29 @@
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { PREFIX_CLASS } from '../../utils';
 import { DateMode, SupportTimeOptions } from '../../type';
 import { NzCalendarI18nInterface, NzI18nService } from '../../i18n';
-import { CandyDate, CompatibleValue } from '../../utils/candy-date';
+import { CandyDate, CompatibleValue, wrongSortOrder } from '../../utils/candy-date';
 import { NgxDatePickerMobileService } from '../../ngx-date-picker-mobile.service';
 import { DatePickerOptions } from '../../directives/date-picker-options.provider';
 import { CalendarPropsType, CalendarStateType } from './date-popup.props.component';
+
+
+function getInputValue(mode: DateMode, startDate?: Date, endDate?: Date) {
+  const startValue =  new CandyDate(startDate);
+  const endValue =  new CandyDate(endDate);
+  const isDescMode = ['quarter', 'year'];
+  if (!endDate) return [startValue];
+  if(wrongSortOrder([startValue, endValue]) && !isDescMode.includes(mode)) {
+  return [startValue, endValue];    
+  }
+  return [endValue, startValue];
+  // return isDescMode.includes(mode) ? [endValue, startValue] : [startValue, endValue];
+// return [Math.min(startDate, endDate)]
+  
+
+}
 
 export const  DateTypeTitle = {
   date: '日期',
@@ -88,13 +105,6 @@ export class DatePopupComponent implements OnInit {
     console.log("this.", this.options)
   }
 
-  // getValue(): CandyDate {
-  //   if (this.isRange) {
-  //     return ((this.datePickerService.value as CandyDate[]) || [])[this.datePickerService.getActiveIndex('left')];
-  //   } else {
-  //     return this.datePickerService.value as CandyDate;
-  //   }
-  // }
 
   getActiveDate(): CandyDate {
     if (this.isRange) {
@@ -159,6 +169,8 @@ export class DatePopupComponent implements OnInit {
       showWeek: this.showWeek,
       showTime: this.showTime,
       isRange: this.options.isRange,
+      maxDate: this.options.maxDate,
+      minDate: this.options.minDate,
     }
   }
 
@@ -275,13 +287,15 @@ export class DatePopupComponent implements OnInit {
                 ? '选择结束时间'
                 : '选择开始时间',
             disConfirmBtn: false,
-            endValue: showTime && (+new Date(startValue as Date)) || date.isSameDay(new CandyDate(startValue))  
-                        ? date.addDays(1).nativeDate
+            endValue: showTime && (newDate >= new Date(startValue as Date) || date.isSameDay(new CandyDate(startValue))  )
+                        ? new Date(date.nativeDate.getMilliseconds() + 3600000)
                         : newDate,
             inputValue: [new CandyDate(startValue), date],
           };
     }
   }
+  
+  // newState.inputValue = getInputValue(this.mode, newState.startValue, newState.endValue);
 
     // this.writeModelData(date)
 

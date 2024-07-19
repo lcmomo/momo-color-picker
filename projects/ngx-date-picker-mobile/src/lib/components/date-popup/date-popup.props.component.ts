@@ -32,6 +32,8 @@ export interface CalendarPropsType {
   showClose: boolean;
   showWeek: boolean;
   timeOptions?: SupportTimeOptions | null;
+  maxDate?: Date;
+  minDate?: Date;
   enterDirection?: 'horizontal' | 'vertical';
   onCancel?: () => void;
   onClear?: () => void;
@@ -50,8 +52,7 @@ export interface CalendarPropsType {
   defaultDate?: Date;
   infiniteOpt?: boolean;
   initalMonths?: number;
-  maxDate?: Date;
-  minDate?: Date;
+  
   onSelectHasDisableDate?: (date: Date[]) => void;
   onSelect?: (date: Date, state?: [Date | undefined, Date | undefined]) => SelectDateType | void;
   rowSize?: 'normal' | 'xl';

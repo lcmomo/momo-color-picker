@@ -51,6 +51,8 @@ export class NgxDatePickerDirective extends DatePickerBase implements OnChanges 
     datePickerOptions.value = this.value ? new Date(this.value) : null;
     datePickerOptions.showTime = this.showTime;
     datePickerOptions.mode = this.mode;
+    datePickerOptions.maxDate = this.maxDate;
+    datePickerOptions.minDate = this.minDate;
     // 生成注入器
     const injector = Injector.create({
       providers: [

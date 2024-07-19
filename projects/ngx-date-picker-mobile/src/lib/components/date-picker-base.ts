@@ -27,7 +27,9 @@ export abstract class DatePickerBase {
   @Input() format: string = 'yyyy-MM-dd';
   @Input() placeHolder: string = '';
   @Input() locale!: NzDatePickerI18nInterface;
-
+  @Input() minDate: Date = new Date(Date.now() - 5184000000);
+  @Input() maxDate: Date =  new Date(Date.now() + 31536000000);
+  
 
   @Output() onConfirm = new EventEmitter<any>();
   customSeriesColor: string = 'rgb(19, 180, 188)';

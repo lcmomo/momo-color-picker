@@ -12,6 +12,8 @@
         [showTimePicker]="state.showTimePicker"
         [timePickerTitle]="state.timePickerTitle"
         [disConfirmBtn]="state.disConfirmBtn"
+        [maxDate]="props.maxDate"
+        [minDate]="props.minDate"
         (valueChange)="onSelectDate($event)"
         (triggerConfirm)="onTriggerConfirm()"
         (timeChange)="onTimeChange($event)"

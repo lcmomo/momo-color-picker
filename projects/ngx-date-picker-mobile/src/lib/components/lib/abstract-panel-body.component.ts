@@ -29,6 +29,9 @@ export abstract class AbstractPanelBody implements OnInit, OnChanges {
   @Input() showTimePicker: boolean = false;
   @Input() timePickerTitle: string = '';
   @Input() disConfirmBtn: boolean = false;
+  @Input() maxDate?: Date = new Date();
+  @Input() minDate?: Date = new Date(1900, 0, 1);
+
 
   @Output() valueChange = new EventEmitter<CandyDate>();
   @Output() triggerConfirm = new EventEmitter<any>();
@@ -177,9 +180,9 @@ export abstract class AbstractPanelBody implements OnInit, OnChanges {
         break;
       } 
       case 'quarter': {
-        const startYear = 1970;
+        const startYear = this.minDate?.getFullYear();
         const currentYear = new Date().getFullYear();
-        currentMonthIndex = currentYear - startYear;
+        currentMonthIndex = startYear ? currentYear - startYear : currentYear;
         break;
 
       }

@@ -18,11 +18,11 @@ export class DatePickerMobileDemoComponent implements OnInit, AfterViewInit {
     customSeriesColor: '#4980FF',
     isInline: false,
     isRange: true,
-    showTime: true
+    showTime: false
   
   }
   nzOpen: boolean = false;
-  mode: DateMode = 'date';
+  mode: DateMode = 'quarter';
   parentContainer: HTMLElement | undefined | null = document.querySelector('body') as HTMLElement;
 
   constructor(private cdr: ChangeDetectorRef) { }
