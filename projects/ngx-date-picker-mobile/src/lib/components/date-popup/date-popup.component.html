@@ -38,5 +38,23 @@
         >
     </quarter-body>
     </ng-container>
+    <ng-container *ngSwitchCase="'week'">
+      <week-header [mode]="props.mode" [(value)]="state.activeDate" [locale]="locale" [showClean]="props.showClean"
+        [showClose]="props.showClose" [title]="title" (valueChange)="headerChange.emit($event)" (close)="onClose()" (clean)="onClean()">
+      </week-header>
+      <week-body [mode]="props.mode" [activeDate]="state.activeDate" [startValue]="state.startValue" [endValue]="state.endValue"
+        [inputValue]="state.inputValue" [showWeek]="props.showWeek" [locale]="locale" [showClean]="props.showClean"
+        [showTime]="props.showTime"
+        [showClose]="props.showClose" [title]="title"
+        [selectedValue]="state.inputValue"
+        [showTimePicker]="state.showTimePicker"
+        [timePickerTitle]="state.timePickerTitle"
+        [disConfirmBtn]="state.disConfirmBtn"
+        (valueChange)="onSelectDate($event)"
+        (triggerConfirm)="onTriggerConfirm()"
+        (timeChange)="onTimeChange($event)"
+        >
+    </week-body>
+    </ng-container>
   </ng-container>
 </div>

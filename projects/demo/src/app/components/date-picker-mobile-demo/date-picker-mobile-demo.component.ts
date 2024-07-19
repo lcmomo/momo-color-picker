@@ -22,7 +22,7 @@ export class DatePickerMobileDemoComponent implements OnInit, AfterViewInit {
   
   }
   nzOpen: boolean = false;
-  mode: DateMode = 'quarter';
+  mode: DateMode = 'week';
   parentContainer: HTMLElement | undefined | null = document.querySelector('body') as HTMLElement;
 
   constructor(private cdr: ChangeDetectorRef) { }

@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgZorroAntdMobileModule  } from "ng-zorro-antd-mobile";
 import { QuarterHeaderComponent } from "./quarter-header.component";
 import { QuarterBodyComponent } from "./quarter-body.component";
+import { WeekBodyComponent } from "./week-body.component";
+import { WeekHeaderComponent } from "./week-header.component";
 
 
 @NgModule({
@@ -15,13 +17,17 @@ import { QuarterBodyComponent } from "./quarter-body.component";
     DateHeaderComponent,
     DateBodyComponent,
     QuarterHeaderComponent,
-    QuarterBodyComponent
+    QuarterBodyComponent,
+    WeekHeaderComponent,
+    WeekBodyComponent
   ],
   exports: [
     DateHeaderComponent,
     DateBodyComponent,
     QuarterHeaderComponent,
-    QuarterBodyComponent
+    QuarterBodyComponent,
+    WeekHeaderComponent,
+    WeekBodyComponent
   ],
   imports: [
     CommonModule,
