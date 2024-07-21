@@ -21,3 +21,5 @@ export function transCompatFormat(format: string): string {
 
 export const FIRST_DAY_OF_WEEK = 0;
 export const END_DAY_OF_WEEK = 6;
+export const WEEK_COUNT_OF_YEAR = 52;
+export const MONTH_COUNT_OF_YEAR = 12;

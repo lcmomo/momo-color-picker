@@ -23,7 +23,7 @@ export abstract class AbstractPanelBody implements OnInit, OnChanges {
   @Input() disabledDate?: (d: Date) => boolean;
   @Input() hoverValue: CandyDate[] = []; // Range ONLY
   @Input() selectedValue: Array<CandyDate | undefined> = []; // Range ONLY
-  @Input() showBlockTitle: boolean = true;
+  // @Input() showBlockTitle: boolean = true;
   @Input() isRange: boolean = true;
   @Input() showTime: boolean = false;
   @Input() showTimePicker: boolean = false;
@@ -41,22 +41,23 @@ export abstract class AbstractPanelBody implements OnInit, OnChanges {
   get showYearTitle(): boolean {
     return this.mode === 'week' || this.showWeek;
   }
-  
 
+  get showBlockTitle(): boolean {
+    return ['date', 'quarter'].includes(this.mode);
+  }
   prefixCls: string = 'ngx-mobile-picker-panel';
   headRow: DateCell[] = [];
-  bodyRows: DateBodyRow[] = [];
+  bodyRows: Array<DateBodyRow> = [];
   MAX_ROW = 5;
   MAX_COL = 7;
   mobileAgent: boolean =  true;
-  
    // 时间选择器内容
   times: Array<TimePickerModel> = [];
    // 具体时间
    time = [0, 0, 0];
 
   abstract makeHeadRow(): DateCell[];
-  abstract makeBodyRows(): DateBodyRow[];
+  abstract makeBodyRows(): Array<DateBodyRow>;
   abstract generateTimePickers(): void;
   abstract formatDate(date: Date): string;
   ngOnChanges(changes: SimpleChanges): void {

@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { DateHelperService } from '../../i18n/date-helper.service';
 import { DateBodyRow, DateCell, PanelSelector } from './interface';
-import { END_DAY_OF_WEEK, FIRST_DAY_OF_WEEK, transCompatFormat } from './util';
+import { END_DAY_OF_WEEK, FIRST_DAY_OF_WEEK, MONTH_COUNT_OF_YEAR, transCompatFormat } from './util';
 import { getInputFormat } from '../../utils';
 import { AbstractPanelBody } from './abstract-panel-body.component';
 import { CandyDate } from '../../utils/candy-date';
 import { TimePickerModel } from '../../type';
+import { startOfYear, endOfYear, startOfWeek, endOfWeek } from 'date-fns';
 @Component({
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -44,27 +45,65 @@ export class WeekBodyComponent extends AbstractPanelBody {
   }
 
   makeBodyRows(): DateBodyRow[] {
-    return this.makeRows();
+    return this.makeRows() as unknown as DateBodyRow[];
   }
 
 
   makeRows() {
-   let blockList: Array<DateBodyRow> = [];
-    const currentYear = this.activeDate.getYear();
-    let activeDate = this.activeDate.clone();
-    for(let i = 0; i < 12; i++) {
-      const block: DateBodyRow = {
-        isActive: false,
-        content: `${currentYear}年${i + 1}月`,
-        children: this.makeDaysOfMonth(activeDate.setMonth(i)),
-        trackByIndex: i,
-        dateCells: []
-      }
-      blockList.push(block)
-    }
-    return blockList;
 
+    const weeks: DateCell[] = [];
+    const startDateYear = startOfYear(this.activeDate.nativeDate);
+    const endDateYear = endOfYear(this.activeDate.nativeDate);
+
+    const activeYear = this.activeDate.getYear();
+    // for (let i = 0; i < MONTH_COUNT_OF_YEAR; i++) {
+    //   const activeMonth = this.activeDate.setMonth(i);
+    //   weeks.push(...this.makeWeeksOfYear(activeMonth));
+    // }
+   return this.makeWeeksOfYear(this.activeDate);
+
+  return weeks;
   }
+
+  makeWeeksOfYear(activeDate: CandyDate) {
+    const weeksOfMonth: Array<DateCell> = [];
+
+    const weeks: Array<DateCell> = [];
+  let weekNum = 0;
+  const currentYear = activeDate.getYear();
+  let startDate = startOfWeek(activeDate.setMonth(0).setDate(0).setHms(0,0,0).nativeDate, { weekStartsOn: FIRST_DAY_OF_WEEK});
+  const month = startDate.getMonth();
+  console.log('isstartDate: ', month, (month > 0 && startDate.getFullYear() === currentYear) || month === 0 && startDate.getFullYear() === currentYear - 1 || month === 0 && startDate.getFullYear() === currentYear + 1)
+  while (startDate.getFullYear() === currentYear || month === 11 && startDate.getFullYear() === currentYear -1) {
+    const dateFormat = transCompatFormat(getInputFormat(this.mode));
+    const title = this.dateHelper.format(startDate, dateFormat);
+    const label = this.dateHelper.format(startDate, 'ww');
+    const startDateCandy = new CandyDate(startDate);
+    console.log('startDate: ', startDate, weekNum, startDate.getFullYear(), startDate.getMonth())
+    // weeks.push({ weekNum, value: new Date(startDate) });
+    const cell: DateCell = {
+      trackByIndex: weekNum,
+      value: startDate,
+      label,
+      isSelected: false,
+      isDisabled: false,
+      isToday: false,
+      title,
+      content: `第${weekNum % 53 + 1}周`,
+      // onClick: () => console.log('click'),
+      onMouseEnter: () => console.log('mouse enter'),
+      onClick: () => this.changeValueFromInside(startDateCandy),
+      // onMouseEnter: () => this.cellHover.emit(date)
+    };
+    this.addCellProperty(cell, activeDate, activeDate);
+    weekNum++;
+    startDate = new CandyDate(startDate).addDays(7).nativeDate;
+    weeks.push(cell);
+  }
+  return weeks;
+
+
+}
 
   makeDaysOfMonth(activeDate: CandyDate) {
     const weekRows: DateBodyRow[] = [];
